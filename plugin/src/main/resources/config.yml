@@ -1,0 +1,34 @@
+# KIBAOFFICIALCore — server-side bridge configuration.
+
+website:
+  base-url: "http://127.0.0.1:8080"
+  api-path: "/api/plugin"
+
+plugin:
+  shared-secret: "change-me-to-a-64-char-random-hex-string"
+  timestamp-tolerance-seconds: 300
+  nonce-reuse-grace-seconds: 3600
+
+server:
+  host: "play.kibaofficial.fun"
+  port: 25565
+  bedrock-port: 19132
+  version: "Java 1.21.x · Bedrock 1.21.x"
+  motd: "&bKIBA&7&8 » &f&lKIBAOFFICIAL&8&7&8 » &bPlay your adventure."
+
+heartbeat:
+  interval-seconds: 20
+  stale-after-seconds: 90
+
+deliveries:
+  claim-interval-seconds: 3
+  batch-size: 25
+  max-attempts: 3
+
+stats:
+  sync-on-join: true
+  sync-interval-seconds: 300
+
+economy:
+  enabled: true
+  refresh-interval-seconds: 60

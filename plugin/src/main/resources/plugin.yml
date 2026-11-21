@@ -1,0 +1,19 @@
+name: KIBAOFFICIALCore
+version: 1.0.0
+main: io.kibaofficial.core.KIBAOfficialCore
+api-version: 1.21
+description: KIBAOFFICIAL SMP — server-side bridge to the KIBAOFFICIAL website portal.
+author: KIBAOFFICIAL
+website: https://kibaofficial.fun
+commands:
+  link:
+    description: Link this Minecraft account to your KIBAOFFICIAL portal account.
+    usage: /link <CODE>
+    permission: kibaofficial.link.use
+permissions:
+  kibaofficial.link.use:
+    description: Allows a player to link their Minecraft account to the portal.
+    default: true
+  kibaofficial.admin:
+    description: Allows staff-level administration commands.
+    default: op
