@@ -33,10 +33,12 @@ import {
   LeaderboardRow,
   ProductCard,
 } from "@/components/cards";
+import { BannerCarousel } from "@/components/banner-carousel";
 import { Countdown } from "@/components/countdown";
 import { getServerSnapshot } from "@/lib/server-status";
 import { getBrandAssets } from "@/lib/brand-assets";
 import {
+  getActiveBanners,
   getFeaturedProducts,
   getLeaderboard,
   getNetworkPulse,
@@ -102,7 +104,7 @@ const steps = [
 ] as const;
 
 export default async function HomePage() {
-  const [snapshot, assets, pulse, products, news, events, richest] = await Promise.all([
+  const [snapshot, assets, pulse, products, news, events, richest, banners] = await Promise.all([
     getServerSnapshot(),
     Promise.resolve(getBrandAssets()),
     getNetworkPulse(),
@@ -110,12 +112,18 @@ export default async function HomePage() {
     getPublishedAnnouncements(3),
     getUpcomingEvents(3),
     getLeaderboard("richest", 5),
+    getActiveBanners(),
   ]);
 
   return (
     <>
+      {/* ============================== TOP SHOWCASE BANNER ============================== */}
+      <section className="container-x relative pt-24 pb-4 sm:pt-28 sm:pb-6">
+        <BannerCarousel banners={banners} />
+      </section>
+
       {/* ============================== HERO ============================== */}
-      <section className="relative isolate flex min-h-[88svh] items-center overflow-hidden pb-20 pt-16">
+      <section className="relative isolate flex min-h-[80svh] items-center overflow-hidden pb-20 pt-8">
         {assets.heroSrc ? (
           <>
             <div

@@ -117,7 +117,7 @@ export function ProductCard({
           name={product.name}
           categorySlug={product.categorySlug}
           image={product.image}
-          className="h-40 w-full"
+          className="aspect-square w-full object-cover"
         />
         <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
           {product.badge ? <Badge tone="gold">{product.badge}</Badge> : null}

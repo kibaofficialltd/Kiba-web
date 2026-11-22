@@ -68,7 +68,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
             name={product.name}
             categorySlug={product.categorySlug}
             image={product.image}
-            className="aspect-[4/3] w-full"
+            className="aspect-square w-full"
             showName
           />
           <div className="grid grid-cols-3 divide-x divide-line/60 border-t border-line/60 text-center">

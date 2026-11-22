@@ -4,8 +4,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   BarChart3,
+  BookOpen,
   FileText,
   Gauge,
+  Image as ImageIcon,
   LifeBuoy,
   Package,
   ScrollText,
@@ -28,9 +30,11 @@ const groups = [
     label: "Community",
     adminOnly: true,
     items: [
+      { href: "/admin/banners", label: "Top Banners", icon: ImageIcon },
       { href: "/admin/users", label: "Players", icon: Users },
       { href: "/admin/products", label: "Store products", icon: Package },
       { href: "/admin/announcements", label: "Announcements", icon: FileText },
+      { href: "/admin/guides", label: "Guides & Wiki", icon: BookOpen },
       { href: "/admin/events", label: "Events", icon: BarChart3 },
     ],
   },

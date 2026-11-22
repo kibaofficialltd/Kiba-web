@@ -18,6 +18,7 @@ export default async function AdminProductsPage() {
         description: products.description,
         priceCoins: products.priceCoins,
         compareAtCoins: products.compareAtCoins,
+        image: products.image,
         badge: products.badge,
         commands: products.commands,
         perPlayerLimit: products.perPlayerLimit,

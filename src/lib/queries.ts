@@ -1,10 +1,12 @@
 import "server-only";
-import { and, count, desc, eq, gte, sql } from "drizzle-orm";
+import { and, asc, count, desc, eq, gte, sql } from "drizzle-orm";
 import { db } from "@/db";
 import {
   announcements,
+  banners,
   eventRegistrations,
   events,
+  guides,
   minecraftAccounts,
   playerStats,
   productCategories,
@@ -333,3 +335,67 @@ export async function getNetworkPulse() {
     activeEvents: Number(active[0]?.value ?? 0),
   };
 }
+
+/* --------------------------------------------------------------- Banners */
+
+export async function getActiveBanners() {
+  return db
+    .select({
+      id: banners.id,
+      title: banners.title,
+      subtitle: banners.subtitle,
+      imageUrl: banners.imageUrl,
+      linkUrl: banners.linkUrl,
+      buttonText: banners.buttonText,
+      sortOrder: banners.sortOrder,
+    })
+    .from(banners)
+    .where(eq(banners.active, true))
+    .orderBy(asc(banners.sortOrder), desc(banners.createdAt));
+}
+
+/* --------------------------------------------------------------- Guides */
+
+export async function getPublishedGuides(category?: string) {
+  const query = db
+    .select({
+      id: guides.id,
+      slug: guides.slug,
+      title: guides.title,
+      category: guides.category,
+      excerpt: guides.excerpt,
+      image: guides.image,
+      sortOrder: guides.sortOrder,
+      updatedAt: guides.updatedAt,
+    })
+    .from(guides)
+    .where(
+      category
+        ? and(eq(guides.published, true), eq(guides.category, category))
+        : eq(guides.published, true),
+    )
+    .orderBy(asc(guides.sortOrder), desc(guides.updatedAt));
+
+  return query;
+}
+
+export async function getGuideBySlug(slug: string) {
+  const rows = await db
+    .select()
+    .from(guides)
+    .where(and(eq(guides.slug, slug), eq(guides.published, true)))
+    .limit(1);
+
+  return rows[0] ?? null;
+}
+
+export async function getGuideCategories() {
+  const rows = await db
+    .select({ category: guides.category })
+    .from(guides)
+    .where(eq(guides.published, true))
+    .groupBy(guides.category);
+
+  return rows.map((r) => r.category);
+}
+

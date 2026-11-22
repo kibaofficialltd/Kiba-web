@@ -661,6 +661,44 @@ export const rateLimits = pgTable(
   },
 );
 
+export const banners = pgTable(
+  "banners",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    title: text("title").notNull(),
+    subtitle: text("subtitle"),
+    imageUrl: text("image_url").notNull(),
+    linkUrl: text("link_url"),
+    buttonText: text("button_text"),
+    active: boolean("active").notNull().default(true),
+    sortOrder: integer("sort_order").notNull().default(0),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [index("banners_active_idx").on(t.active, t.sortOrder)],
+);
+
+export const guides = pgTable(
+  "guides",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    slug: text("slug").notNull(),
+    title: text("title").notNull(),
+    category: text("category").notNull().default("Getting Started"),
+    excerpt: text("excerpt").notNull().default(""),
+    content: text("content").notNull().default(""),
+    image: text("image"),
+    published: boolean("published").notNull().default(true),
+    sortOrder: integer("sort_order").notNull().default(0),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (t) => [
+    uniqueIndex("guides_slug_uq").on(t.slug),
+    index("guides_published_idx").on(t.published, t.sortOrder),
+  ],
+);
+
 export const settings = pgTable("settings", {
   key: text("key").primaryKey(),
   value: jsonb("value").$type<unknown>().notNull(),

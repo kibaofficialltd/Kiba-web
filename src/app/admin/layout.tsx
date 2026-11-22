@@ -59,9 +59,11 @@ function AdminMobileNav({ admin }: { admin: boolean }) {
     { href: "/admin/tickets", label: "Tickets" },
     ...(admin
       ? [
+          { href: "/admin/banners", label: "Banners" },
           { href: "/admin/users", label: "Players" },
           { href: "/admin/products", label: "Products" },
           { href: "/admin/announcements", label: "News" },
+          { href: "/admin/guides", label: "Guides" },
           { href: "/admin/events", label: "Events" },
           { href: "/admin/settings", label: "Settings" },
           { href: "/admin/audit", label: "Audit" },
