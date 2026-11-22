@@ -87,15 +87,37 @@ export async function parseBody<S extends ZodType>(req: NextRequest, schema: S):
 export function assertSameOrigin(req: NextRequest): void {
   const origin = req.headers.get("origin");
   const referer = req.headers.get("referer");
-  const expected = new URL(env.appUrl).host;
   const candidate = origin ?? (referer ? new URL(referer).origin : null);
   if (!candidate) {
     throw new ApiError(403, "ORIGIN_REQUIRED", "Missing request origin.");
   }
-  const host = candidate.replace(/^https?:\/\//, "").split("/")[0];
-  if (host !== expected) {
-    throw new ApiError(403, "BAD_ORIGIN", "Cross-origin request rejected.");
+  const host = candidate.replace(/^https?:\/\//, "").split("/")[0].toLowerCase();
+  const hostHeader = (req.headers.get("x-forwarded-host") ?? req.headers.get("host") ?? "")
+    .toLowerCase()
+    .split(":")[0];
+
+  // 1. Matches the request's own host (standard same-origin)
+  if (hostHeader && (host === hostHeader || host.split(":")[0] === hostHeader)) {
+    return;
   }
+
+  // 2. Matches configured env.appUrl
+  try {
+    const expected = new URL(env.appUrl).host.toLowerCase().split(":")[0];
+    if (host === expected || host.split(":")[0] === expected) return;
+  } catch {}
+
+  // 3. Known deployment domains and localhost
+  if (
+    host.endsWith(".duckdns.org") ||
+    host.endsWith(".vercel.app") ||
+    host === "localhost" ||
+    host === "127.0.0.1"
+  ) {
+    return;
+  }
+
+  throw new ApiError(403, "BAD_ORIGIN", "Cross-origin request rejected.");
 }
 
 export async function requireApiUser(): Promise<SessionUser> {

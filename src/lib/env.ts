@@ -34,4 +34,4 @@ export const env = {
   cronSecret: process.env.CRON_SECRET ?? "",
 };
 
-export const isSecureOrigin = env.appUrl.startsWith("https://");
+export const isSecureOrigin = env.isProd || env.appUrl.startsWith("https://");
