@@ -12,3 +12,5 @@ plugin/target
 target/
 *.log
 *.jar
+.vercel
+.env*

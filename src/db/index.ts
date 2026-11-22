@@ -24,8 +24,11 @@ const pool =
     connectionString,
     max: Number(process.env.DATABASE_POOL_MAX ?? 10),
     idleTimeoutMillis: 30_000,
-    connectionTimeoutMillis: 10_000,
-    ssl: process.env.DATABASE_SSL === "true" ? { rejectUnauthorized: false } : undefined,
+    connectionTimeoutMillis: 30_000,
+    ssl:
+      process.env.DATABASE_SSL === "true" || (connectionString && connectionString.includes("sslmode=require"))
+        ? { rejectUnauthorized: false }
+        : undefined,
   });
 
 /**
