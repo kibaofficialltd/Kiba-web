@@ -72,9 +72,35 @@ export function BannerCarousel({ banners }: { banners: BannerItem[] }) {
         Rectangle Ratio: 3:1 on desktop (1920x640px or 1200x400px),
         proportional on mobile with comfortable min-height.
       */}
-      <div className="relative aspect-[16/8] sm:aspect-[21/9] lg:aspect-[3/1] min-h-[240px] sm:min-h-[300px] lg:min-h-[360px] w-full overflow-hidden">
+      <div className="relative aspect-[16/8] sm:aspect-[21/9] lg:aspect-[3/1] min-h-[220px] sm:min-h-[280px] lg:min-h-[340px] w-full overflow-hidden">
         {items.map((item, index) => {
           const isActive = index === current;
+          const content = (
+            <div className="relative h-full w-full overflow-hidden">
+              {/* Background banner image */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={item.imageUrl}
+                alt={item.title}
+                className="h-full w-full object-cover object-center transition-transform duration-700 ease-out group-hover/banner:scale-[1.012]"
+                loading={index === 0 ? "eager" : "lazy"}
+              />
+
+              {/* Gentle gradient for contrast without obscuring artwork */}
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-black/15" />
+
+              {/* Interactive CTA badge in corner */}
+              {item.buttonText ? (
+                <div className="pointer-events-none absolute bottom-3 left-3 sm:bottom-5 sm:left-6 z-10">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-ink/80 px-3.5 py-1.5 text-xs sm:text-sm font-bold text-parchment backdrop-blur-md shadow-2xl transition-all duration-300 group-hover/banner:border-gold group-hover/banner:text-gold-bright group-hover/banner:bg-ink group-hover/banner:shadow-[0_0_15px_rgba(201,169,97,0.35)]">
+                    <span>{item.buttonText}</span>
+                    <ArrowRight className="size-3.5 transition-transform duration-300 group-hover/banner:translate-x-1" />
+                  </div>
+                </div>
+              ) : null}
+            </div>
+          );
+
           return (
             <div
               key={item.id}
@@ -83,49 +109,17 @@ export function BannerCarousel({ banners }: { banners: BannerItem[] }) {
                 isActive ? "opacity-100 z-10 pointer-events-auto" : "opacity-0 z-0 pointer-events-none",
               )}
             >
-              {/* Background image */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={item.imageUrl}
-                alt={item.title}
-                className="h-full w-full object-cover object-center filter brightness-[0.82] contrast-[1.08] transition-transform duration-1000 ease-out hover:scale-[1.02]"
-                loading={index === 0 ? "eager" : "lazy"}
-              />
-
-              {/* Dark vignette gradients for high readability */}
-              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-transparent" />
-              <div className="absolute inset-0 bg-gradient-to-r from-ink/90 via-ink/40 to-transparent" />
-
-              {/* Banner Content */}
-              <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-8 lg:p-12">
-                <div className="max-w-2xl space-y-2 sm:space-y-3">
-                  <div className="inline-flex items-center gap-1.5 rounded-full border border-gold/40 bg-gold/15 px-3 py-1 text-[0.65rem] font-bold uppercase tracking-[0.2em] text-gold-bright backdrop-blur-md">
-                    <Sparkles className="size-3 text-gold" /> Featured Spotlight
-                  </div>
-
-                  <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-parchment drop-shadow-md">
-                    {item.title}
-                  </h2>
-
-                  {item.subtitle ? (
-                    <p className="line-clamp-2 text-xs sm:text-sm text-parchment-dim drop-shadow">
-                      {item.subtitle}
-                    </p>
-                  ) : null}
-
-                  {item.linkUrl ? (
-                    <div className="pt-2">
-                      <Link
-                        href={item.linkUrl}
-                        className="btn btn-gold btn-sm sm:btn-md inline-flex items-center gap-2 shadow-lg"
-                      >
-                        {item.buttonText || "Learn more"}
-                        <ArrowRight className="size-4" />
-                      </Link>
-                    </div>
-                  ) : null}
-                </div>
-              </div>
+              {item.linkUrl ? (
+                <Link
+                  href={item.linkUrl}
+                  className="group/banner block h-full w-full cursor-pointer focus:outline-none"
+                  aria-label={item.title}
+                >
+                  {content}
+                </Link>
+              ) : (
+                <div className="group/banner h-full w-full">{content}</div>
+              )}
             </div>
           );
         })}
