@@ -59,12 +59,21 @@ export async function usernameExists(username: string) {
   return Boolean(rows[0]);
 }
 
+const isOwnerEmail = (email: string) => {
+  const normalized = email.toLowerCase().trim();
+  return (
+    normalized === "kibaturkey@gmail.com" ||
+    normalized === (process.env.SEED_ADMIN_EMAIL ?? "owner@kibaofficial.fun").toLowerCase().trim()
+  );
+};
+
 export async function createUser(input: {
   email: string;
   username: string;
   password: string;
 }) {
   const passwordHash = await hashPassword(input.password);
+  const isOwner = isOwnerEmail(input.email);
   try {
     const inserted = await db
       .insert(users)
@@ -72,6 +81,8 @@ export async function createUser(input: {
         email: input.email.toLowerCase(),
         username: input.username,
         passwordHash,
+        role: isOwner ? "owner" : "player",
+        emailVerifiedAt: isOwner ? new Date() : null,
       })
       .returning({ id: users.id, email: users.email, username: users.username });
 
