@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { cx } from "@/lib/cx";
-import { Crown, Sparkles, Eye, Shield, User } from "lucide-react";
+import { Crown, Sparkles, Flame, Eye, Shield, User } from "lucide-react";
 
 export type RankBadgeProps = {
   rank?: string | null;
@@ -13,6 +13,7 @@ export type RankBadgeProps = {
 /**
  * Returns color, styling, and label for server ranks and staff roles:
  * - Aurora -> Blue colour
+ * - Ember -> Orange colour
  * - VoidWalker -> Purple colour
  * - Sovereign -> Yellow colour
  * - Owner / Admin -> Red badge ( owner)
@@ -44,6 +45,19 @@ export function getRankBadgeConfig(rankOrRole?: string | null) {
         "border-blue-500/40 bg-blue-950/40 text-blue-400 shadow-[0_0_12px_rgba(59,130,246,0.3)] ring-1 ring-blue-500/30",
       dotClass: "bg-blue-400",
       glowColor: "rgba(59, 130, 246, 0.4)",
+    };
+  }
+
+  // 3. Ember -> Orange colour
+  if (raw === "ember" || raw.includes("ember")) {
+    return {
+      type: "ember",
+      label: "Ember",
+      icon: Flame,
+      badgeClass:
+        "border-orange-500/40 bg-orange-950/40 text-orange-400 shadow-[0_0_12px_rgba(249,115,22,0.3)] ring-1 ring-orange-500/30",
+      dotClass: "bg-orange-400",
+      glowColor: "rgba(249, 115, 22, 0.4)",
     };
   }
 
