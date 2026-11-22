@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import Link from "next/link";
+import { BookOpen } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth";
 import { getLinkedAccount, latestLinkCode } from "@/lib/minecraft";
 import { LinkPanel } from "./link-panel";
@@ -25,6 +27,23 @@ export default async function LinkPage() {
           purchases and leaderboard placement.
         </p>
       </header>
+
+      <div className="mb-6 rounded-2xl border border-gold/30 bg-gold/10 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <p className="text-sm font-semibold text-parchment flex items-center gap-2">
+            <BookOpen className="size-4 text-gold" /> Need help linking?
+          </p>
+          <p className="text-xs text-muted">
+            Check our illustrated step-by-step tutorial with screenshots to link your account in under 1 minute.
+          </p>
+        </div>
+        <Link
+          href="/guide/how-to-link-minecraft"
+          className="btn btn-gold btn-sm shrink-0 inline-flex items-center gap-1.5"
+        >
+          View Visual Guide →
+        </Link>
+      </div>
 
       <LinkPanel
         initialAccount={
