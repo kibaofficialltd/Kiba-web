@@ -75,6 +75,16 @@ export default async function GuidePage({
             and claiming land, to mastering the coin economy and in-game commands.
           </p>
 
+          {/* Guide Hero Banner */}
+          <div className="mt-8 overflow-hidden rounded-2xl border border-gold/30 shadow-2xl bg-ink max-w-4xl group">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/guides/banners/guide-hero-banner.jpg"
+              alt="KIBAOFFICIAL SMP Guide - Learn, Explore, Play"
+              className="w-full h-auto object-cover max-h-[360px] group-hover:scale-[1.01] transition duration-500"
+            />
+          </div>
+
           {/* Search bar */}
           <form method="GET" action="/guide" className="mt-8 max-w-xl">
             {category ? <input type="hidden" name="category" value={category} /> : null}
