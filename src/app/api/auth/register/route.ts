@@ -4,12 +4,9 @@ import { db } from "@/db";
 import { users } from "@/db/schema";
 import { ApiError, assertSameOrigin, clientIp, jsonOk, parseBody, route } from "@/lib/api";
 import { createSession } from "@/lib/auth";
-import { createEmailToken } from "@/lib/tokens";
 import { createUser, emailExists, usernameExists } from "@/lib/accounts";
 import { registerSchema } from "@/lib/validation";
 import { enforceRateLimit } from "@/lib/rate-limit";
-import { sendMail, verificationEmail } from "@/lib/mail";
-import { env } from "@/lib/env";
 import { audit } from "@/lib/audit";
 
 export const runtime = "nodejs";
@@ -38,14 +35,6 @@ export const POST = route(async (req: NextRequest) => {
     password: body.password,
   });
 
-  const token = await createEmailToken(user.id, "verify_email", 24);
-  const verifyUrl = `${env.appUrl}/verify-email?token=${encodeURIComponent(token)}`;
-  const mail = await sendMail({
-    to: user.email,
-    subject: "Verify your KIBAOFFICIAL SMP account",
-    text: verificationEmail(user.username, verifyUrl),
-  });
-
   await createSession(user.id, {
     ip,
     userAgent: req.headers.get("user-agent"),
@@ -65,9 +54,6 @@ export const POST = route(async (req: NextRequest) => {
     .where(eq(users.id, user.id));
 
   return jsonOk({
-    redirect: "/dashboard",
-    emailSent: mail.delivered,
-    // Development convenience only: never exposed in production builds.
-    devVerifyUrl: !mail.delivered && !env.isProd ? verifyUrl : undefined,
+    redirect: "/dashboard/link",
   });
 });

@@ -101,7 +101,7 @@ export default async function SupportPage() {
               One issue per ticket, please. Abuse of the support system can lead to restrictions.
             </p>
             <div className="mt-5">
-              <TicketForm signedIn={Boolean(user)} verified={Boolean(user?.emailVerifiedAt)} />
+              <TicketForm signedIn={Boolean(user)} verified={true} />
             </div>
           </section>
         </div>

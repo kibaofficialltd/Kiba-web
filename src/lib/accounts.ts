@@ -82,7 +82,7 @@ export async function createUser(input: {
         username: input.username,
         passwordHash,
         role: isOwner ? "owner" : "player",
-        emailVerifiedAt: isOwner ? new Date() : null,
+        emailVerifiedAt: new Date(),
       })
       .returning({ id: users.id, email: users.email, username: users.username });
 

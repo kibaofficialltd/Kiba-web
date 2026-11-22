@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { and, count, eq, isNull } from "drizzle-orm";
-import { AlertTriangle, CheckCircle2, Coins, MailWarning } from "lucide-react";
+import { AlertTriangle, CheckCircle2, Coins } from "lucide-react";
 import { db } from "@/db";
 import { notifications } from "@/db/schema";
 import { getCurrentUser, isStaff } from "@/lib/auth";
@@ -60,17 +60,6 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
         <div className="min-w-0">
           <DashboardMobileNav notifications={unread} staff={isStaff(user.role)} />
-
-          {!user.emailVerifiedAt ? (
-            <Banner
-              icon={<MailWarning className="size-4" />}
-              tone="gold"
-              title="Verify your email"
-              action={{ href: "/dashboard/settings", label: "Resend link" }}
-            >
-              Rewards, purchases and Minecraft linking stay locked until your email is confirmed.
-            </Banner>
-          ) : null}
 
           {!account ? (
             <Banner

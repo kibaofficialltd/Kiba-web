@@ -43,7 +43,7 @@ export default async function LinkPage() {
             ? { code: pending.code, expiresAt: pending.expiresAt.toISOString() }
             : null
         }
-        emailVerified={Boolean(user.emailVerifiedAt)}
+        emailVerified={true}
       />
     </div>
   );

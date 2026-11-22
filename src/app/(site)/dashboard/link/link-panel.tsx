@@ -201,12 +201,6 @@ export function LinkPanel({
 
   return (
     <div className="space-y-5">
-      {!emailVerified ? (
-        <FormAlert
-          message="Verify your email address before linking a Minecraft account. You can resend the verification link from Account settings."
-        />
-      ) : null}
-
       <section className="panel overflow-hidden">
         <div className="border-b border-line/70 px-5 py-3.5">
           <span className="flex items-center gap-2 text-[0.66rem] font-bold uppercase tracking-[0.18em] text-parchment">
@@ -231,7 +225,7 @@ export function LinkPanel({
             {error ? <FormAlert message={error} /> : null}
 
             {!code ? (
-              <SubmitButton pending={pending} onClick={generate} type="button" className="btn-block" disabled={!emailVerified || pending}>
+              <SubmitButton pending={pending} onClick={generate} type="button" className="btn-block" disabled={pending}>
                 {pending ? "Generating" : "Generate link code"}
               </SubmitButton>
             ) : (

@@ -17,11 +17,4 @@ export async function requireVerifiedEmail(userId: string): Promise<void> {
   if (user.status === "suspended") {
     throw new ApiError(403, "ACCOUNT_SUSPENDED", "This account is suspended.");
   }
-  if (!user.emailVerifiedAt) {
-    throw new ApiError(
-      403,
-      "EMAIL_NOT_VERIFIED",
-      "Verify your email address before using this feature.",
-    );
-  }
 }

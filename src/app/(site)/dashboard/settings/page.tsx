@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { getCurrentUser } from "@/lib/auth";
 import { getLinkedAccount } from "@/lib/minecraft";
 import { formatDate } from "@/lib/format";
-import { ChangePasswordForm, ResendVerification, SignOutEverywhere } from "./settings-forms";
+import { ChangePasswordForm, SignOutEverywhere } from "./settings-forms";
 
 export const metadata: Metadata = { title: "Account settings" };
 export const dynamic = "force-dynamic";
@@ -51,9 +51,9 @@ export default async function SettingsPage() {
             <dd className="mt-0.5 text-sm text-parchment-dim">{formatDate(user.createdAt)}</dd>
           </div>
           <div className="sm:col-span-2">
-            <dt className="text-[0.58rem] uppercase tracking-[0.16em] text-muted">Email status</dt>
+            <dt className="text-[0.58rem] uppercase tracking-[0.16em] text-muted">Account status</dt>
             <dd className="mt-1">
-              <ResendVerification verified={Boolean(user.emailVerifiedAt)} />
+              <Badge tone="moss">Active</Badge>
             </dd>
           </div>
           <div className="sm:col-span-2">
