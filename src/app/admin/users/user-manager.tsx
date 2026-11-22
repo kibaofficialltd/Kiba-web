@@ -8,6 +8,7 @@ import { FormAlert } from "@/components/ui/form";
 import { ApiClientError, api } from "@/lib/http-client";
 import { formatNumber, formatDate } from "@/lib/format";
 import { cx } from "@/lib/cx";
+import { RankBadge } from "@/components/rank-badge";
 
 export type AdminUserRow = {
   id: string;
@@ -66,9 +67,11 @@ export function UserManager({ users, viewerRole }: { users: AdminUserRow[]; view
                     ) : null}
                   </td>
                   <td>
-                    <span className={user.role === "player" ? "text-xs text-muted" : "text-xs text-gold"}>
-                      {user.role}
-                    </span>
+                    {user.role === "player" ? (
+                      <span className="text-xs text-muted">player</span>
+                    ) : (
+                      <RankBadge role={user.role} size="xs" />
+                    )}
                   </td>
                   <td>
                     <span

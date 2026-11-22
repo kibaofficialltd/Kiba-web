@@ -185,6 +185,7 @@ export type LeaderboardEntry = {
   value: number;
   label: string;
   href: string | null;
+  playerRank?: string | null;
 };
 
 const statColumns = {
@@ -203,9 +204,11 @@ export async function getLeaderboard(category: LeaderboardCategory, limit = 25):
         uuid: minecraftAccounts.uuid,
         balance: users.balance,
         accountName: users.username,
+        playerRank: playerStats.rank,
       })
       .from(users)
       .innerJoin(minecraftAccounts, eq(minecraftAccounts.userId, users.id))
+      .leftJoin(playerStats, eq(playerStats.uuid, minecraftAccounts.uuid))
       .orderBy(desc(users.balance))
       .limit(limit);
 
@@ -216,6 +219,7 @@ export async function getLeaderboard(category: LeaderboardCategory, limit = 25):
       value: row.balance,
       label: "coins",
       href: `/player/${encodeURIComponent(row.username)}`,
+      playerRank: row.playerRank,
     }));
   }
 
@@ -226,6 +230,7 @@ export async function getLeaderboard(category: LeaderboardCategory, limit = 25):
         uuid: playerStats.uuid,
         kills: playerStats.kills,
         deaths: playerStats.deaths,
+        playerRank: playerStats.rank,
         ratio: sql<number>`(${playerStats.kills}::float + 1) / (${playerStats.deaths} + 1)`,
       })
       .from(playerStats)
@@ -239,6 +244,7 @@ export async function getLeaderboard(category: LeaderboardCategory, limit = 25):
       value: Number(row.ratio),
       label: `${row.kills}K / ${row.deaths}D`,
       href: `/player/${encodeURIComponent(row.username)}`,
+      playerRank: row.playerRank,
     }));
   }
 
@@ -248,6 +254,7 @@ export async function getLeaderboard(category: LeaderboardCategory, limit = 25):
       username: playerStats.username,
       uuid: playerStats.uuid,
       value: column,
+      playerRank: playerStats.rank,
     })
     .from(playerStats)
     .orderBy(desc(column))
@@ -260,6 +267,7 @@ export async function getLeaderboard(category: LeaderboardCategory, limit = 25):
     value: Number(row.value),
     label: category,
     href: `/player/${encodeURIComponent(row.username)}`,
+    playerRank: row.playerRank,
   }));
 }
 

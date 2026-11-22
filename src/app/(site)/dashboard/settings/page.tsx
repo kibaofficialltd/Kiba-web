@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { RankBadge } from "@/components/rank-badge";
 import { getCurrentUser } from "@/lib/auth";
 import { getLinkedAccount } from "@/lib/minecraft";
 import { formatDate } from "@/lib/format";
@@ -43,7 +44,7 @@ export default async function SettingsPage() {
           <div>
             <dt className="text-[0.58rem] uppercase tracking-[0.16em] text-muted">Role</dt>
             <dd className="mt-0.5">
-              <Badge tone={user.role === "player" ? "default" : "gold"}>{user.role}</Badge>
+              <RankBadge role={user.role} size="sm" />
             </dd>
           </div>
           <div>

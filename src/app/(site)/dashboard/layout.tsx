@@ -7,6 +7,7 @@ import { notifications } from "@/db/schema";
 import { getCurrentUser, isStaff } from "@/lib/auth";
 import { getLinkedAccount } from "@/lib/minecraft";
 import { DashboardMobileNav, DashboardNav } from "@/components/dashboard/sidebar";
+import { RankBadge } from "@/components/rank-badge";
 import { Avatar } from "@/components/avatar";
 import { Badge } from "@/components/ui/badge";
 import { formatNumber } from "@/lib/format";
@@ -47,11 +48,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
                   <Coins className="size-4" /> {formatNumber(user.balance)}
                 </p>
               </div>
-              {isStaff(user.role) ? (
-                <div className="mt-3">
-                  <Badge tone="gold">{user.role}</Badge>
-                </div>
-              ) : null}
+              <div className="mt-3 flex items-center gap-2">
+                <RankBadge role={user.role} size="sm" />
+              </div>
             </div>
 
             <DashboardNav notifications={unread} staff={isStaff(user.role)} />

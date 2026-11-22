@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Crown, Swords, Timer, Trophy } from "lucide-react";
 import { Avatar } from "@/components/avatar";
 import { Badge } from "@/components/ui/badge";
+import { RankBadge } from "@/components/rank-badge";
 import { getLeaderboard, type LeaderboardCategory } from "@/lib/queries";
 import { formatNumber, formatPlaytime } from "@/lib/format";
 import { cx } from "@/lib/cx";
@@ -131,9 +132,14 @@ export default async function LeaderboardsPage({
                     >
                       {entry.username}
                     </Link>
-                    <p className="text-[0.62rem] uppercase tracking-[0.14em] text-muted">
-                      {entry.label}
-                    </p>
+                    <div className="mt-1 flex items-center gap-2">
+                      {entry.playerRank && entry.playerRank.toLowerCase() !== "member" ? (
+                        <RankBadge rank={entry.playerRank} size="xs" />
+                      ) : null}
+                      <p className="text-[0.62rem] uppercase tracking-[0.14em] text-muted">
+                        {entry.label}
+                      </p>
+                    </div>
                   </div>
                 </div>
                 <p className="mt-4 font-display text-3xl text-gold-bright">
@@ -183,6 +189,9 @@ export default async function LeaderboardsPage({
                           >
                             <Avatar name={entry.username} size={26} />
                             <span className="truncate">{entry.username}</span>
+                            {entry.playerRank && entry.playerRank.toLowerCase() !== "member" ? (
+                              <RankBadge rank={entry.playerRank} size="xs" />
+                            ) : null}
                           </Link>
                         </td>
                         <td className="text-right font-mono tabular-nums text-parchment">

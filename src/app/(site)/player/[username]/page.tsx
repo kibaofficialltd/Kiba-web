@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { Avatar } from "@/components/avatar";
 import { Badge } from "@/components/ui/badge";
+import { RankBadge } from "@/components/rank-badge";
 import { getPublicPlayer } from "@/lib/queries";
 import { formatCoins, formatDate, formatNumber, formatPlaytime, relativeTime } from "@/lib/format";
 
@@ -62,8 +63,7 @@ export default async function PlayerProfilePage({
               <Badge tone="moss">
                 <Globe2 className="size-3" /> {account.edition}
               </Badge>
-              {stats?.rank ? <Badge tone="gold">{stats.rank}</Badge> : null}
-              {account.role !== "player" ? <Badge tone="sky">{account.role}</Badge> : null}
+              <RankBadge rank={stats?.rank} role={account.role} size="md" />
             </div>
             <h1 className="display-xl mt-2 break-words">{account.username}</h1>
             <p className="mt-1 text-xs text-muted">

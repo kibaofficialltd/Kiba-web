@@ -13,6 +13,7 @@ import {
   Trophy,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { RankBadge, getRankBadgeConfig } from "@/components/rank-badge";
 import { Avatar } from "@/components/avatar";
 import { formatCoins, formatDate } from "@/lib/format";
 import type { LeaderboardEntry } from "@/lib/queries";
@@ -119,8 +120,16 @@ export function ProductCard({
           image={product.image}
           className="aspect-square w-full object-cover"
         />
-        <div className="absolute left-3 top-3 flex flex-wrap gap-1.5">
-          {product.badge ? <Badge tone="gold">{product.badge}</Badge> : null}
+        <div className="absolute left-3 top-3 flex flex-wrap items-center gap-1.5">
+          {product.badge ? (
+            getRankBadgeConfig(product.badge) ? (
+              <RankBadge rank={product.badge} size="xs" />
+            ) : (
+              <Badge tone="gold">{product.badge}</Badge>
+            )
+          ) : getRankBadgeConfig(product.name) ? (
+            <RankBadge rank={product.name} size="xs" />
+          ) : null}
           {discount ? <Badge tone="ember">−{discount}%</Badge> : null}
         </div>
       </Link>

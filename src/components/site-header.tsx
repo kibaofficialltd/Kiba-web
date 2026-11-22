@@ -19,6 +19,7 @@ import { useCart } from "@/components/store/cart-provider";
 import { site } from "@/lib/site";
 import { cx } from "@/lib/cx";
 import { formatNumber } from "@/lib/format";
+import { RankBadge } from "@/components/rank-badge";
 
 export type HeaderUser = {
   username: string;
@@ -124,8 +125,9 @@ export function SiteHeader({ logoSrc, user }: { logoSrc: string | null; user: He
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={user.avatar} alt="" className="size-8 rounded-full" width={32} height={32} />
                 <span className="text-left">
-                  <span className="block text-[0.72rem] font-semibold leading-tight text-parchment">
-                    {user.username}
+                  <span className="flex items-center gap-1.5 text-[0.72rem] font-semibold leading-tight text-parchment">
+                    <span>{user.username}</span>
+                    <RankBadge role={user.role} size="xs" />
                   </span>
                   <span className="flex items-center gap-1 text-[0.66rem] leading-tight text-gold">
                     <Coins className="size-2.5" /> {formatNumber(user.balance)}
@@ -218,7 +220,10 @@ export function SiteHeader({ logoSrc, user }: { logoSrc: string | null; user: He
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={user.avatar} alt="" className="size-10 rounded-full" />
                   <div>
-                    <p className="text-sm font-semibold">{user.username}</p>
+                    <div className="flex items-center gap-1.5">
+                      <p className="text-sm font-semibold">{user.username}</p>
+                      <RankBadge role={user.role} size="xs" />
+                    </div>
                     <p className="flex items-center gap-1 text-xs text-gold">
                       <Coins className="size-3" /> {formatNumber(user.balance)} coins
                     </p>
