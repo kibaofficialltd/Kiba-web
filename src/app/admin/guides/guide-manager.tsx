@@ -1,16 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   BookOpen,
+  Copy,
   ExternalLink,
   Eye,
   EyeOff,
   Image as ImageIcon,
+  Images,
   Loader2,
   Plus,
   Save,
+  Sparkles,
   Trash2,
   X,
 } from "lucide-react";
@@ -238,6 +241,28 @@ function GuideForm({
   const [customCategory, setCustomCategory] = useState(
     guide && !COMMON_CATEGORIES.includes(guide.category) ? guide.category : "",
   );
+  const [content, setContent] = useState(guide?.content ?? "");
+  const [newImgUrl, setNewImgUrl] = useState("");
+  const [newImgCaption, setNewImgCaption] = useState("");
+
+  // Live scan for all images currently inside markdown content
+  const extractedImages = useMemo(() => {
+    const list: { alt: string; src: string; raw: string }[] = [];
+    const regex = /!\[([^\]]*)\]\(([^)]+)\)/g;
+    let match: RegExpExecArray | null;
+    while ((match = regex.exec(content)) !== null) {
+      list.push({ alt: match[1] || "Screenshot", src: match[2], raw: match[0] });
+    }
+    return list;
+  }, [content]);
+
+  function insertImageIntoContent(url: string, caption: string) {
+    if (!url.trim()) return;
+    const tag = `\n\n![${caption.trim() || "Guide illustration"}](${url.trim()})\n\n`;
+    setContent((prev) => prev + tag);
+    setNewImgUrl("");
+    setNewImgCaption("");
+  }
 
   async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -252,7 +277,7 @@ function GuideForm({
       slug: String(form.get("slug") ?? "").trim() || undefined,
       category: finalCategory,
       excerpt: String(form.get("excerpt") ?? "").trim(),
-      content: String(form.get("content") ?? "").trim(),
+      content: content.trim(),
       image: imageUrl.trim() || null,
       sortOrder: Number(form.get("sortOrder") ?? 0),
       published: form.get("published") === "on",
@@ -391,6 +416,116 @@ function GuideForm({
         </div>
       </div>
 
+      {/* --- MULTI-IMAGE & SCREENSHOTS MANAGER --- */}
+      <div className="rounded-xl border border-gold/40 bg-ink-raised/50 p-4 sm:p-5 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+          <div>
+            <span className="text-[0.68rem] font-bold uppercase tracking-[0.18em] text-gold-bright flex items-center gap-1.5">
+              <Images className="size-4 text-gold" /> Guide Screenshots & Images ({extractedImages.length})
+            </span>
+            <p className="text-xs text-muted mt-0.5">
+              Add multiple screenshots, diagrams, and photos into your guide. They will be formatted with full lightbox zoom!
+            </p>
+          </div>
+        </div>
+
+        {/* Add New Image Form */}
+        <div className="grid gap-2.5 sm:grid-cols-12 rounded-xl border border-line/80 bg-ink/80 p-3.5 items-end">
+          <div className="sm:col-span-6 space-y-1">
+            <label className="text-[0.68rem] font-medium text-parchment">Image URL</label>
+            <Input
+              value={newImgUrl}
+              onChange={(e) => setNewImgUrl(e.target.value)}
+              placeholder="https://... or /guides/..."
+              className="text-xs"
+            />
+          </div>
+          <div className="sm:col-span-4 space-y-1">
+            <label className="text-[0.68rem] font-medium text-parchment">Caption / Step Title</label>
+            <Input
+              value={newImgCaption}
+              onChange={(e) => setNewImgCaption(e.target.value)}
+              placeholder="e.g. Step 1: Tap Menu Button"
+              className="text-xs"
+            />
+          </div>
+          <div className="sm:col-span-2">
+            <button
+              type="button"
+              onClick={() => insertImageIntoContent(newImgUrl, newImgCaption)}
+              disabled={!newImgUrl.trim()}
+              className="btn btn-gold btn-sm w-full inline-flex items-center justify-center gap-1"
+            >
+              <Plus className="size-3.5" /> Insert
+            </button>
+          </div>
+        </div>
+
+        {/* Quick Presets */}
+        <div className="flex flex-wrap items-center gap-1.5 pt-1">
+          <span className="text-[0.65rem] text-muted font-medium">Quick presets:</span>
+          <button
+            type="button"
+            onClick={() => insertImageIntoContent("/guides/banners/guide-hero-banner.jpg", "Guide Hero Banner")}
+            className="rounded-full border border-line bg-ink px-2.5 py-1 text-[0.65rem] text-parchment-dim hover:border-gold hover:text-gold transition"
+          >
+            + Guide Banner
+          </button>
+          <button
+            type="button"
+            onClick={() => insertImageIntoContent("/guides/link/step-1-open-menu.png", "Step 1: Open Menu")}
+            className="rounded-full border border-line bg-ink px-2.5 py-1 text-[0.65rem] text-parchment-dim hover:border-gold hover:text-gold transition"
+          >
+            + Menu Step
+          </button>
+          <button
+            type="button"
+            onClick={() => insertImageIntoContent("/guides/link/step-4-generate-code.png", "Generate Link Code")}
+            className="rounded-full border border-line bg-ink px-2.5 py-1 text-[0.65rem] text-parchment-dim hover:border-gold hover:text-gold transition"
+          >
+            + Link Code
+          </button>
+          <button
+            type="button"
+            onClick={() => insertImageIntoContent("/guides/link/step-6-in-game-link.jpg", "In-Game Chat Command")}
+            className="rounded-full border border-line bg-ink px-2.5 py-1 text-[0.65rem] text-parchment-dim hover:border-gold hover:text-gold transition"
+          >
+            + In-Game Chat
+          </button>
+        </div>
+
+        {/* Grid of images currently inside this guide */}
+        {extractedImages.length > 0 ? (
+          <div className="space-y-2 pt-2 border-t border-line/60">
+            <span className="text-[0.65rem] font-bold text-parchment uppercase tracking-wider">
+              Images in this guide ({extractedImages.length})
+            </span>
+            <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2.5">
+              {extractedImages.map((img, idx) => (
+                <div
+                  key={idx}
+                  className="group relative aspect-video rounded-xl overflow-hidden border border-line bg-ink shadow-sm"
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={img.src} alt={img.alt} className="size-full object-cover" />
+                  <div className="absolute inset-0 bg-black/75 opacity-0 group-hover:opacity-100 transition flex flex-col justify-between p-2">
+                    <span className="text-[0.62rem] text-parchment truncate font-medium">{img.alt}</span>
+                    <button
+                      type="button"
+                      onClick={() => setContent((prev) => prev.replace(img.raw, ""))}
+                      className="btn btn-sm py-0.5 text-[0.65rem] text-ember bg-ink/90 hover:bg-ember hover:text-white transition"
+                      title="Remove from guide"
+                    >
+                      <Trash2 className="size-2.5 inline mr-1" /> Remove
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : null}
+      </div>
+
       <Field label="Excerpt / Summary" htmlFor="excerpt" hint="Short 1-2 sentence preview for the guide card.">
         <Input id="excerpt" name="excerpt" defaultValue={guide?.excerpt} placeholder="Brief summary of what players learn in this guide." />
       </Field>
@@ -398,14 +533,15 @@ function GuideForm({
       <Field
         label="Guide Content (Markdown Supported)"
         htmlFor="content"
-        hint="Supports headings (#, ##), bullet lists (-), bold (**text**), and code blocks (`/command`)."
+        hint="Supports headings (#, ##), bullet lists (-), bold (**text**), code (`/command`), and images (![caption](url))."
       >
         <Textarea
           id="content"
           name="content"
-          rows={12}
-          defaultValue={guide?.content}
-          placeholder="# Guide Title&#10;&#10;Explain step-by-step how to play...&#10;&#10;## Commands&#10;- `/link <code>` - Link your account"
+          rows={14}
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          placeholder="# Guide Title&#10;&#10;Explain step-by-step how to play...&#10;&#10;![Screenshot Description](https://...image.png)&#10;&#10;## Commands&#10;- `/link <code>` - Link your account"
           className="font-mono text-xs"
           required
         />
