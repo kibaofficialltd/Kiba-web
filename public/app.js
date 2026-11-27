@@ -64,11 +64,23 @@ function updateNavAuthUi(profile) {
   const navMenu = document.getElementById('navAuthMenuLink');
   if (profile) {
     const label = `👤 ${profile.name}`;
-    if (navBtn) navBtn.textContent = label;
-    if (navMenu) navMenu.textContent = label;
+    if (navBtn) {
+      navBtn.textContent = label;
+      navBtn.setAttribute('href', '/profile');
+    }
+    if (navMenu) {
+      navMenu.textContent = label;
+      navMenu.setAttribute('href', '/profile');
+    }
   } else {
-    if (navBtn) navBtn.textContent = 'Login / Link';
-    if (navMenu) navMenu.textContent = 'Login / Link';
+    if (navBtn) {
+      navBtn.textContent = 'Login / Link';
+      navBtn.setAttribute('href', '/login');
+    }
+    if (navMenu) {
+      navMenu.textContent = 'Login / Link';
+      navMenu.setAttribute('href', '/login');
+    }
   }
 }
 
@@ -82,6 +94,9 @@ async function loadAuthSession() {
   updateNavAuthUi(state.authProfile);
   if (state.page === 'login') {
     renderAuthPage();
+  }
+  if (state.page === 'profile') {
+    renderProfilePage();
   }
 }
 
@@ -110,7 +125,7 @@ async function loadOverview() {
     if (footerPhone) footerPhone.textContent = data.botPhone;
 
     const waUrl = data.links.botWhatsAppUrl;
-    for (const id of ['heroChatBtn', 'cardBotWaBtn']) {
+    for (const id of ['heroChatBtn', 'cardBotWaBtn', 'cardAiChatBtn']) {
       const el = document.getElementById(id);
       if (el) el.href = waUrl;
     }
@@ -364,6 +379,38 @@ function showAuthAlert(message, isSuccess = false) {
   alertEl.hidden = false;
 }
 
+function populateAccountMetrics(p, containerEl) {
+  if (!p) return;
+  setMetric(document.getElementById('accWallet'), p.wallet, (v) => formatNumber(v));
+  setMetric(document.getElementById('accBank'), p.bank, (v) => formatNumber(v));
+  setMetric(document.getElementById('accTotal'), p.totalWealth, (v) => formatNumber(v));
+  setMetric(document.getElementById('accTickets'), p.lotteryTickets, (v) => formatNumber(v));
+  if (containerEl) window.ShoreMotion?.observeReveals?.(containerEl);
+
+  const rankEl = document.getElementById('accRank');
+  const standingEl = document.getElementById('accStanding');
+  const chatsEl = document.getElementById('accChats');
+  const phoneEl = document.getElementById('accPhone');
+  if (rankEl) rankEl.textContent = p.rank;
+  if (standingEl) standingEl.textContent = p.standing ? `#${p.standing.position} of ${p.standing.total}` : '--';
+  if (chatsEl) chatsEl.textContent = formatNumber(p.messagesCount);
+  if (phoneEl) phoneEl.textContent = p.phone || 'Verified';
+
+  const nextEl = document.getElementById('accNextRank');
+  if (nextEl) {
+    nextEl.textContent = p.nextTier
+      ? `Next Rank: ${p.nextTier.title} (${formatNumber(p.nextTier.remaining)} ♦ more needed)`
+      : 'Maximum Rank Achieved!';
+  }
+
+  const rId = document.getElementById('accLotteryRound');
+  const rSlot = document.getElementById('accLotterySlot');
+  const rFill = document.getElementById('accLotteryFilled');
+  if (rId) rId.textContent = `#${p.lottery.roundId}`;
+  if (rSlot) rSlot.textContent = p.lottery.userSlot ? `Slot #${p.lottery.userSlot}` : 'Not Entered Yet';
+  if (rFill) rFill.textContent = `${p.lottery.totalSlots} / ${p.lottery.maxSlots}`;
+}
+
 function renderAuthPage() {
   const authSec = document.getElementById('authSection');
   const accSec = document.getElementById('accountSection');
@@ -381,27 +428,367 @@ function renderAuthPage() {
 
   document.getElementById('accName').textContent = p.name;
   document.getElementById('accBio').textContent = p.bio;
-  setMetric(document.getElementById('accWallet'), p.wallet, (v) => formatNumber(v));
-  setMetric(document.getElementById('accBank'), p.bank, (v) => formatNumber(v));
-  setMetric(document.getElementById('accTotal'), p.totalWealth, (v) => formatNumber(v));
-  setMetric(document.getElementById('accTickets'), p.lotteryTickets, (v) => formatNumber(v));
-  window.ShoreMotion?.observeReveals?.(accSec);
+  populateAccountMetrics(p, accSec);
+}
 
-  document.getElementById('accRank').textContent = p.rank;
-  document.getElementById('accStanding').textContent = p.standing ? `#${p.standing.position} of ${p.standing.total}` : '--';
-  document.getElementById('accChats').textContent = formatNumber(p.messagesCount);
-  document.getElementById('accPhone').textContent = p.phone || 'Verified';
+/* --- Profile & WhatsApp Business Appearance Page --- */
+const PRESET_CLASSES = ['preset-aurora', 'preset-ruby', 'preset-shrine', 'preset-amber', 'preset-void'];
+const profileDraft = {
+  editing: false,
+  preset: 'aurora',
+  avatarDataUrl: undefined,
+  bannerDataUrl: undefined,
+  clearAvatar: false,
+  clearBanner: false
+};
 
-  const nextEl = document.getElementById('accNextRank');
-  if (nextEl) {
-    nextEl.textContent = p.nextTier
-      ? `Next Rank: ${p.nextTier.title} (${formatNumber(p.nextTier.remaining)} ♦ more needed)`
-      : 'Maximum Rank Achieved!';
+function showEditAlert(message, isSuccess = false) {
+  const alertEl = document.getElementById('editAlert');
+  if (!alertEl) return;
+  if (!message) {
+    alertEl.hidden = true;
+    return;
+  }
+  alertEl.textContent = message;
+  alertEl.classList.toggle('success', Boolean(isSuccess));
+  alertEl.hidden = false;
+}
+
+/**
+ * Center-crop and compress a gallery image file onto a Canvas before uploading.
+ */
+async function compressGalleryImage(file, { width, height, quality = 0.86 }) {
+  if (!file || !file.type.startsWith('image/')) {
+    throw new Error('Please select a valid image from your gallery.');
   }
 
-  document.getElementById('accLotteryRound').textContent = `#${p.lottery.roundId}`;
-  document.getElementById('accLotterySlot').textContent = p.lottery.userSlot ? `Slot #${p.lottery.userSlot}` : 'Not Entered Yet';
-  document.getElementById('accLotteryFilled').textContent = `${p.lottery.totalSlots} / ${p.lottery.maxSlots}`;
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((resolve, reject) => {
+      const el = new Image();
+      el.onload = () => resolve(el);
+      el.onerror = () => reject(new Error('Could not read the selected photo.'));
+      el.src = url;
+    });
+
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) throw new Error('Canvas unavailable on this browser.');
+
+    const srcW = img.naturalWidth || img.width;
+    const srcH = img.naturalHeight || img.height;
+    const targetRatio = width / height;
+    const srcRatio = srcW / srcH;
+
+    let cropW = srcW;
+    let cropH = srcH;
+    let cropX = 0;
+    let cropY = 0;
+
+    if (srcRatio > targetRatio) {
+      cropW = Math.round(srcH * targetRatio);
+      cropX = Math.round((srcW - cropW) / 2);
+    } else if (srcRatio < targetRatio) {
+      cropH = Math.round(srcW / targetRatio);
+      cropY = Math.round((srcH - cropH) / 2);
+    }
+
+    ctx.drawImage(img, cropX, cropY, cropW, cropH, 0, 0, width, height);
+    return canvas.toDataURL('image/jpeg', quality);
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
+function applyBannerVisual(presetName, bannerUrl) {
+  const box = document.getElementById('profBannerBox');
+  const img = document.getElementById('profBannerImg');
+  if (box) {
+    box.classList.remove(...PRESET_CLASSES);
+    box.classList.add(`preset-${presetName || 'aurora'}`);
+  }
+  if (img) {
+    if (bannerUrl) {
+      img.src = bannerUrl;
+      img.hidden = false;
+    } else {
+      img.removeAttribute('src');
+      img.hidden = true;
+    }
+  }
+  document.querySelectorAll('#presetSwatches .swatch-btn').forEach((btn) => {
+    btn.classList.toggle('active', btn.getAttribute('data-preset') === presetName && !bannerUrl);
+  });
+}
+
+function renderProfilePage() {
+  const guestSec = document.getElementById('profileGuestSection');
+  const mainSec = document.getElementById('profileMainSection');
+  if (!guestSec || !mainSec) return;
+
+  const p = state.authProfile;
+  if (!p) {
+    guestSec.hidden = false;
+    mainSec.hidden = true;
+    window.ShoreMotion?.observeReveals?.(guestSec);
+    return;
+  }
+
+  guestSec.hidden = true;
+  mainSec.hidden = false;
+
+  const avatarSrc = (!profileDraft.editing && p.avatarUrl) || (profileDraft.avatarDataUrl) || (profileDraft.clearAvatar ? '/assets/menu.jpg' : p.avatarUrl) || '/assets/menu.jpg';
+  const bannerSrc = profileDraft.editing
+    ? (profileDraft.bannerDataUrl || (profileDraft.clearBanner ? null : p.bannerUrl))
+    : p.bannerUrl;
+  const activePreset = profileDraft.editing ? profileDraft.preset : (p.bannerPreset || 'aurora');
+
+  const avImg = document.getElementById('profAvatarImg');
+  const edAvImg = document.getElementById('editAvatarPreview');
+  if (avImg) avImg.src = avatarSrc;
+  if (edAvImg) edAvImg.src = avatarSrc;
+
+  applyBannerVisual(activePreset, bannerSrc);
+
+  document.getElementById('profName').textContent = p.name;
+  document.getElementById('profTitle').textContent = p.title || 'Black Shores Traveler';
+  document.getElementById('profRank').textContent = p.rank;
+  const standingStr = p.standing ? `Standing #${p.standing.position} of ${p.standing.total}` : 'Black Shores';
+  document.getElementById('profMeta').textContent = `${p.phone || 'Verified'}  •  ${standingStr}`;
+  document.getElementById('profBio').textContent = p.bio || 'Guided by the Black Shores.';
+
+  if (!profileDraft.editing) {
+    profileDraft.preset = p.bannerPreset || 'aurora';
+    const nameInput = document.getElementById('editNameInput');
+    const titleInput = document.getElementById('editTitleInput');
+    const bioInput = document.getElementById('editBioInput');
+    const bioCount = document.getElementById('editBioCount');
+    if (nameInput) nameInput.value = p.name || '';
+    if (titleInput) titleInput.value = p.title || '';
+    if (bioInput) {
+      bioInput.value = p.bio || '';
+      if (bioCount) bioCount.textContent = `${bioInput.value.length} / 140`;
+    }
+  }
+
+  populateAccountMetrics(p, mainSec);
+}
+
+function setupProfilePage() {
+  const editPanel = document.getElementById('profileEditPanel');
+  const toggleBtn = document.getElementById('toggleEditBtn');
+  const cancelBtn = document.getElementById('cancelEditBtn');
+  const saveBtn = document.getElementById('saveProfileBtn');
+  const logoutBtn = document.getElementById('profileLogoutBtn');
+
+  const quickAvatarBtn = document.getElementById('quickAvatarBtn');
+  const quickBannerBtn = document.getElementById('quickBannerBtn');
+  const editAvatarBtn = document.getElementById('editAvatarBtn');
+  const editBannerBtn = document.getElementById('editBannerBtn');
+  const resetAvatarBtn = document.getElementById('resetAvatarBtn');
+  const resetBannerBtn = document.getElementById('resetBannerBtn');
+
+  const avatarInput = document.getElementById('quickAvatarInput');
+  const bannerInput = document.getElementById('quickBannerInput');
+  const bioInput = document.getElementById('editBioInput');
+  const bioCount = document.getElementById('editBioCount');
+
+  function openEditor() {
+    const p = state.authProfile;
+    if (!p || !editPanel) return;
+    profileDraft.editing = true;
+    profileDraft.preset = p.bannerPreset || 'aurora';
+    profileDraft.avatarDataUrl = undefined;
+    profileDraft.bannerDataUrl = undefined;
+    profileDraft.clearAvatar = false;
+    profileDraft.clearBanner = false;
+    showEditAlert('');
+    renderProfilePage();
+    editPanel.hidden = false;
+    editPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function closeEditor() {
+    if (!editPanel) return;
+    profileDraft.editing = false;
+    profileDraft.avatarDataUrl = undefined;
+    profileDraft.bannerDataUrl = undefined;
+    profileDraft.clearAvatar = false;
+    profileDraft.clearBanner = false;
+    showEditAlert('');
+    editPanel.hidden = true;
+    renderProfilePage();
+  }
+
+  toggleBtn?.addEventListener('click', () => {
+    if (editPanel?.hidden) openEditor();
+    else closeEditor();
+  });
+  cancelBtn?.addEventListener('click', closeEditor);
+
+  bioInput?.addEventListener('input', () => {
+    if (bioCount) bioCount.textContent = `${bioInput.value.length} / 140`;
+  });
+
+  quickAvatarBtn?.addEventListener('click', () => {
+    if (!avatarInput) return;
+    avatarInput.dataset.mode = 'quick';
+    avatarInput.click();
+  });
+  editAvatarBtn?.addEventListener('click', () => {
+    if (!avatarInput) return;
+    avatarInput.dataset.mode = 'draft';
+    avatarInput.click();
+  });
+
+  quickBannerBtn?.addEventListener('click', () => {
+    if (!bannerInput) return;
+    bannerInput.dataset.mode = 'quick';
+    bannerInput.click();
+  });
+  editBannerBtn?.addEventListener('click', () => {
+    if (!bannerInput) return;
+    bannerInput.dataset.mode = 'draft';
+    bannerInput.click();
+  });
+
+  avatarInput?.addEventListener('change', async () => {
+    const file = avatarInput.files?.[0];
+    const mode = avatarInput.dataset.mode || 'quick';
+    avatarInput.value = '';
+    if (!file) return;
+
+    try {
+      showEditAlert('');
+      const dataUrl = await compressGalleryImage(file, { width: 420, height: 420, quality: 0.88 });
+      if (mode === 'quick') {
+        showToast('Uploading profile photo...');
+        const res = await fetchJson('/api/profile/update', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ avatarDataUrl: dataUrl })
+        });
+        state.authProfile = res.profile;
+        updateNavAuthUi(res.profile);
+        renderProfilePage();
+        showToast('Profile picture updated & synced to bot!');
+      } else {
+        profileDraft.avatarDataUrl = dataUrl;
+        profileDraft.clearAvatar = false;
+        renderProfilePage();
+      }
+    } catch (err) {
+      showEditAlert(err.message);
+      showToast(err.message);
+    }
+  });
+
+  bannerInput?.addEventListener('change', async () => {
+    const file = bannerInput.files?.[0];
+    const mode = bannerInput.dataset.mode || 'quick';
+    bannerInput.value = '';
+    if (!file) return;
+
+    try {
+      showEditAlert('');
+      const dataUrl = await compressGalleryImage(file, { width: 1200, height: 440, quality: 0.84 });
+      if (mode === 'quick') {
+        showToast('Uploading cover background...');
+        const res = await fetchJson('/api/profile/update', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ bannerDataUrl: dataUrl })
+        });
+        state.authProfile = res.profile;
+        renderProfilePage();
+        showToast('Background cover updated & synced to bot!');
+      } else {
+        profileDraft.bannerDataUrl = dataUrl;
+        profileDraft.clearBanner = false;
+        renderProfilePage();
+      }
+    } catch (err) {
+      showEditAlert(err.message);
+      showToast(err.message);
+    }
+  });
+
+  resetAvatarBtn?.addEventListener('click', () => {
+    profileDraft.avatarDataUrl = undefined;
+    profileDraft.clearAvatar = true;
+    renderProfilePage();
+  });
+
+  resetBannerBtn?.addEventListener('click', () => {
+    profileDraft.bannerDataUrl = undefined;
+    profileDraft.clearBanner = true;
+    renderProfilePage();
+  });
+
+  document.querySelectorAll('#presetSwatches .swatch-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const preset = btn.getAttribute('data-preset') || 'aurora';
+      profileDraft.preset = preset;
+      profileDraft.bannerDataUrl = undefined;
+      profileDraft.clearBanner = true;
+      renderProfilePage();
+    });
+  });
+
+  editPanel?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    showEditAlert('');
+    const nameVal = (document.getElementById('editNameInput')?.value || '').trim();
+    const titleVal = (document.getElementById('editTitleInput')?.value || '').trim();
+    const bioVal = (document.getElementById('editBioInput')?.value || '').trim();
+
+    if (saveBtn) {
+      saveBtn.disabled = true;
+      saveBtn.textContent = 'Saving...';
+    }
+
+    try {
+      const payload = {
+        name: nameVal,
+        title: titleVal,
+        bio: bioVal,
+        bannerPreset: profileDraft.preset
+      };
+      if (profileDraft.avatarDataUrl) payload.avatarDataUrl = profileDraft.avatarDataUrl;
+      else if (profileDraft.clearAvatar) payload.clearAvatar = true;
+
+      if (profileDraft.bannerDataUrl) payload.bannerDataUrl = profileDraft.bannerDataUrl;
+      else if (profileDraft.clearBanner) payload.clearBanner = true;
+
+      const res = await fetchJson('/api/profile/update', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      state.authProfile = res.profile;
+      updateNavAuthUi(res.profile);
+      closeEditor();
+      showToast('Profile saved & synced to WhatsApp .profile!');
+    } catch (err) {
+      showEditAlert(err.message);
+    } finally {
+      if (saveBtn) {
+        saveBtn.disabled = false;
+        saveBtn.textContent = 'Save & Sync Profile';
+      }
+    }
+  });
+
+  logoutBtn?.addEventListener('click', async () => {
+    await fetchJson('/api/auth/logout', { method: 'POST' }).catch(() => {});
+    state.authProfile = null;
+    updateNavAuthUi(null);
+    closeEditor();
+    showToast('Session unlinked.');
+  });
 }
 
 function setupLoginHandlers() {
@@ -477,10 +864,8 @@ function setupLoginHandlers() {
       });
       state.authProfile = res.profile;
       updateNavAuthUi(res.profile);
-      renderAuthPage();
-      otpForm.hidden = true;
-      phoneForm.hidden = false;
-      if (otpInput) otpInput.value = '';
+      window.location.href = '/profile';
+      return;
     } catch (err) {
       showAuthAlert(err.message);
     } finally {
@@ -551,6 +936,13 @@ async function init() {
     setupLoginHandlers();
     setInterval(() => {
       if (state.authProfile) loadAuthSession();
+    }, 15000);
+  }
+
+  if (state.page === 'profile') {
+    setupProfilePage();
+    setInterval(() => {
+      if (state.authProfile && !profileDraft.editing) loadAuthSession();
     }, 15000);
   }
 }

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Traveler Profile — Black Shores</title>
+  <meta name="theme-color" content="#4effff" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body data-page="profile">
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="bg-stage" aria-hidden="true">
+    <div class="bg-aurora bg-aurora-cyan"></div>
+    <div class="bg-aurora bg-aurora-indigo"></div>
+    <div class="bg-aurora bg-aurora-ruby"></div>
+    <div class="bg-grid"></div>
+    <canvas id="shoreCanvas"></canvas>
+  </div>
+
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand">
+        <img src="/assets/thumb.jpg" alt="Shorekeeper" />
+        <span>BLACK SHORES</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/leaderboard">Leaderboard</a>
+        <a href="/lottery">Lottery</a>
+        <a href="/commands">Commands</a>
+        <a href="/profile" class="active">Profile</a>
+        <a href="/login" id="navAuthMenuLink">Login / Link</a>
+      </nav>
+
+      <div class="nav-right">
+        <span class="status-badge" id="botStatusPill">
+          <span class="status-dot"></span>
+          <span id="botStatusText">Online</span>
+        </span>
+        <a href="/login" class="btn nav-cta" id="navAuthBtn">Login / Link</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Loading / Guest Prompt -->
+    <section id="profileGuestSection" class="auth-wrap" hidden>
+      <div class="panel-card auth-card">
+        <div class="auth-head">
+          <img src="/assets/menu.jpg" alt="Shorekeeper" class="comm-avatar" style="margin-bottom:14px;" />
+          <h1 class="auth-title">Traveler Profile</h1>
+          <p class="subpage-desc">
+            Link your WhatsApp account to customize your Display Name, Bio, Profile Picture from your gallery, and Background Cover — synced live to <code>.profile</code> on WhatsApp.
+          </p>
+        </div>
+        <a href="/login" class="btn primary full-btn">Link WhatsApp Account with OTP</a>
+      </div>
+    </section>
+
+    <!-- Authenticated Business-Style Profile & Editor -->
+    <section id="profileMainSection" class="profile-page-wrap" hidden>
+      <div class="panel-card biz-profile-card">
+        <!-- Cover Background Banner (like WhatsApp Business Profile) -->
+        <div class="biz-cover preset-aurora" id="profBannerBox">
+          <img id="profBannerImg" class="biz-cover-img" alt="Profile Cover Background" hidden />
+          <div class="biz-cover-scrim"></div>
+          <div class="biz-cover-top">
+            <span class="biz-tag">✦ Black Shores Profile</span>
+            <button type="button" class="biz-cover-btn" id="quickBannerBtn">🖼️ Change Background</button>
+          </div>
+          <input type="file" id="quickAvatarInput" accept="image/*" hidden />
+          <input type="file" id="quickBannerInput" accept="image/*" hidden />
+        </div>
+
+        <div class="biz-body">
+          <div class="biz-header-row">
+            <div class="biz-avatar-wrap">
+              <img src="/assets/menu.jpg" alt="Profile Picture" class="biz-avatar" id="profAvatarImg" />
+              <button type="button" class="biz-avatar-cam" id="quickAvatarBtn" title="Change Profile Picture from Gallery" aria-label="Change Profile Picture">📷</button>
+            </div>
+
+            <div class="biz-actions-bar">
+              <span class="linked-badge">✅ Synced with WhatsApp <code>.profile</code></span>
+              <div class="biz-btn-group">
+                <button type="button" class="btn primary biz-edit-btn" id="toggleEditBtn">✏️ Edit Profile</button>
+                <button type="button" class="btn logout-btn" id="profileLogoutBtn">Unlink</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="biz-identity">
+            <h1 class="biz-name" id="profName">--</h1>
+            <div class="biz-subtitle-row">
+              <span class="biz-title-tag" id="profTitle">--</span>
+              <span class="biz-dot">&bull;</span>
+              <span class="biz-rank-tag" id="profRank">--</span>
+            </div>
+            <div class="biz-meta-line" id="profMeta">--</div>
+            <div class="biz-bio-box" id="profBio">--</div>
+          </div>
+
+          <!-- Inline Profile Studio Editor Drawer -->
+          <form id="profileEditPanel" class="biz-editor" hidden>
+            <div class="biz-editor-head">
+              <h2>Customize Profile &amp; Appearance</h2>
+              <span class="field-hint">Updates reflect on Website &amp; WhatsApp <code>.profile</code></span>
+            </div>
+
+            <div id="editAlert" class="auth-alert" hidden></div>
+
+            <div class="edit-media-grid">
+              <div class="edit-media-box">
+                <div class="field-label">Profile Picture (Gallery)</div>
+                <div class="edit-media-row">
+                  <img src="/assets/menu.jpg" alt="Avatar Preview" class="edit-avatar-thumb" id="editAvatarPreview" />
+                  <div class="edit-media-btns">
+                    <button type="button" class="btn btn-sm-ghost" id="editAvatarBtn">📷 Pick from Gallery</button>
+                    <button type="button" class="btn btn-sm-ghost" id="resetAvatarBtn">Reset Default</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="edit-media-box">
+                <div class="field-label">Profile Background Cover</div>
+                <div class="edit-media-btns" style="margin-bottom:10px;">
+                  <button type="button" class="btn btn-sm-ghost" id="editBannerBtn">🖼️ Upload Cover Photo</button>
+                  <button type="button" class="btn btn-sm-ghost" id="resetBannerBtn">Remove Custom Cover</button>
+                </div>
+                <div class="preset-swatches" id="presetSwatches">
+                  <button type="button" class="swatch-btn active" data-preset="aurora">Aurora</button>
+                  <button type="button" class="swatch-btn" data-preset="ruby">Ruby</button>
+                  <button type="button" class="swatch-btn" data-preset="shrine">Shorekeeper</button>
+                  <button type="button" class="swatch-btn" data-preset="amber">Solaris</button>
+                  <button type="button" class="swatch-btn" data-preset="void">Void</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="edit-fields-grid">
+              <div>
+                <label class="field-label" for="editNameInput">Display Name (2–30 chars)</label>
+                <input type="text" id="editNameInput" class="auth-input" maxlength="30" required />
+              </div>
+              <div>
+                <label class="field-label" for="editTitleInput">Profile Subtitle / Category</label>
+                <input type="text" id="editTitleInput" class="auth-input" maxlength="40" placeholder="e.g. Black Shores Traveler" />
+              </div>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                <label class="field-label" for="editBioInput">About / Bio</label>
+                <span class="field-hint" id="editBioCount">0 / 140</span>
+              </div>
+              <textarea id="editBioInput" class="auth-input edit-bio-input" rows="3" maxlength="140" placeholder="Tell Black Shores travelers about yourself..."></textarea>
+            </div>
+
+            <div class="biz-editor-actions">
+              <button type="button" class="btn btn-sm-ghost" id="cancelEditBtn" style="width:auto;">Cancel</button>
+              <button type="submit" class="btn primary" id="saveProfileBtn">Save &amp; Sync Profile</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card is-ruby">
+          <div class="stat-value ruby" id="accWallet">--</div>
+          <div class="stat-label">♦ Wallet</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="accBank">--</div>
+          <div class="stat-label">🏦 Bank Vault</div>
+        </div>
+        <div class="stat-card is-ruby">
+          <div class="stat-value ruby" id="accTotal">--</div>
+          <div class="stat-label">💠 Total Wealth</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="accTickets">--</div>
+          <div class="stat-label">🎟️ Lottery Tickets</div>
+        </div>
+      </div>
+
+      <div class="lottery-grid">
+        <div class="panel-card">
+          <h2 style="margin:0 0 14px;">Traveler Standing &amp; Rank</h2>
+          <div class="lb-list">
+            <div class="lb-row"><span>🎖️ Current Rank</span><strong id="accRank" style="color:var(--accent)">--</strong></div>
+            <div class="lb-row"><span>🏆 Leaderboard Standing</span><strong id="accStanding">--</strong></div>
+            <div class="lb-row"><span>💬 Total Chats</span><strong id="accChats">--</strong></div>
+            <div class="lb-row"><span>📱 Linked Number</span><strong id="accPhone">--</strong></div>
+          </div>
+          <p class="subpage-desc" id="accNextRank" style="margin-top:16px;"></p>
+        </div>
+
+        <div class="panel-card">
+          <h2 style="margin:0 0 14px;">Active Jackpot Status</h2>
+          <div class="lb-list">
+            <div class="lb-row"><span>🎲 Current Round</span><strong id="accLotteryRound" style="color:var(--accent)">--</strong></div>
+            <div class="lb-row"><span>🎰 Your Round Entry</span><strong id="accLotterySlot">--</strong></div>
+            <div class="lb-row"><span>👥 Round Slots Filled</span><strong id="accLotteryFilled">--</strong></div>
+          </div>
+          <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="/lottery" class="btn">View Jackpot</a>
+            <a href="/leaderboard" class="btn">View Leaderboards</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span><strong>BLACK SHORES</strong> — Shorekeeper Bot (<span id="footerPhone">+48450424525</span>)</span>
+    <span>KIBA OFFICIAL</span>
+  </footer>
+
+  <div class="toast" id="toast">Updated!</div>
+  <script src="/motion.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

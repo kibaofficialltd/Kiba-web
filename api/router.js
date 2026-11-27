@@ -91,6 +91,15 @@ export default async function handler(req, res) {
         res.end(text);
         return;
       }
+
+      if (ct.startsWith('image/')) {
+        const buf = Buffer.from(await upstream.arrayBuffer());
+        res.statusCode = upstream.status;
+        res.setHeader('Content-Type', ct);
+        res.setHeader('Cache-Control', upstream.headers.get('cache-control') || 'public, max-age=300');
+        res.end(buf);
+        return;
+      }
     } catch (err) {
       console.warn('[Vercel Proxy] Upstream unreachable, using fallback:', err.message);
     }
@@ -120,7 +129,12 @@ export default async function handler(req, res) {
     return sendJson(res, { success: true });
   }
 
-  if (pathname.startsWith('/api/auth/')) {
+  if (pathname.startsWith('/api/auth/') || pathname.startsWith('/api/profile')) {
+    if (pathname === '/api/profile-media') {
+      res.statusCode = 404;
+      res.end('Not Found');
+      return;
+    }
     return sendJson(
       res,
       {
