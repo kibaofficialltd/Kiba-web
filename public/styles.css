@@ -21,6 +21,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html, body {
   background: var(--bg);
   color: var(--text);
@@ -1336,6 +1340,7 @@ body:not([data-page="home"]) .bg-stage::before {
   padding: 8px 12px;
   font-size: 0.82rem;
   border-radius: 9px;
+  margin-top: 0;
 }
 
 .linked-badge {
