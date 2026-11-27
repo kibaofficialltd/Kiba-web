@@ -17,6 +17,8 @@
 
     colQuery: '',
     colTier: 'all',
+    activeDeck: '1',
+    targetSlot: null,
     meData: null,
 
     marketQuery: '',
@@ -226,7 +228,9 @@
           cardsState.meData = {
             wallet: res.wallet,
             collection: res.collection,
-            deck: res.deck
+            deck: res.deck,
+            decks: res.decks,
+            deckBgUrl: res.deckBgUrl
           };
           showPackResult(res.pack, res.pulled);
           showToast(`Summoned ${res.pack.name}!`);
@@ -292,7 +296,9 @@
     cardsState.meData = {
       wallet: res.wallet,
       collection: res.collection,
-      deck: res.deck
+      deck: res.deck,
+      decks: res.decks,
+      deckBgUrl: res.deckBgUrl
     };
     if (Array.isArray(res.market)) {
       cardsState.marketItems = res.market;
@@ -331,22 +337,38 @@
     const data = cardsState.meData;
     if (!data) return;
 
-    const deck = data.deck || [];
+    const allDecks = data.decks || { '1': [], '2': [], '3': [] };
+    const layout = allDecks[cardsState.activeDeck] || [];
+    const filledCount = layout.filter((s) => !s.empty).length;
     const col = data.collection || { total: 0, tierCounts: {}, items: [] };
 
     const deckBadge = document.getElementById('deckCountBadge');
     const summaryChip = document.getElementById('colSummaryChip');
-    if (deckBadge) deckBadge.textContent = `${deck.length} / 6 Slots`;
+    const targetChip = document.getElementById('targetSlotChip');
+    const stage = document.getElementById('deckCollageStage');
+    if (deckBadge) deckBadge.textContent = `Deck ${cardsState.activeDeck}: ${filledCount} / 12`;
     if (summaryChip) summaryChip.textContent = `Owned: ${col.total} Cards`;
+    if (stage && data.deckBgUrl) {
+      stage.style.backgroundImage = `url('${data.deckBgUrl}')`;
+    }
+    if (targetChip) {
+      targetChip.hidden = !cardsState.targetSlot;
+      if (cardsState.targetSlot) targetChip.textContent = `Target: Slot #${cardsState.targetSlot}`;
+    }
+
+    document.querySelectorAll('#deckTabBtns .tab-btn').forEach((b) => {
+      b.classList.toggle('active', b.getAttribute('data-dnum') === cardsState.activeDeck);
+    });
 
     const deckGrid = document.getElementById('myDeckGrid');
     if (deckGrid) {
       const slots = [];
-      for (let i = 0; i < 6; i++) {
-        const card = deck[i];
-        if (card) {
+      for (let i = 0; i < 12; i++) {
+        const card = layout[i];
+        const isTarget = cardsState.targetSlot === i + 1;
+        if (card && !card.empty) {
           slots.push(`
-            <div class="deck-slot filled tier-${escapeHtml(card.tier)}">
+            <div class="deck-slot filled tier-${escapeHtml(card.tier)} ${isTarget ? 'is-targeted' : ''}" data-slot="${i + 1}">
               ${renderCardMediaHtml(card, 'deck-slot-img')}
               <div class="deck-slot-overlay">
                 <span class="deck-slot-num">#${i + 1} • ${escapeHtml(card.tier === 'S' ? 'S' : `T${card.tier}`)}</span>
@@ -356,15 +378,33 @@
             </div>
           `);
         } else {
-          slots.push(`<div class="deck-slot empty"><span>Slot ${i + 1}</span><small>Pin from collection</small></div>`);
+          slots.push(`
+            <div class="deck-slot empty ${isTarget ? 'is-targeted' : ''}" data-slot="${i + 1}" title="Click to select Slot #${i + 1}, then click Pin on any card below">
+              <span>${isTarget ? `🎯 Slot ${i + 1}` : `Slot ${i + 1}`}</span>
+              <small>${isTarget ? 'Pick card below' : 'Open / Tap'}</small>
+            </div>
+          `);
         }
       }
       deckGrid.innerHTML = slots.join('');
+
+      deckGrid.querySelectorAll('.deck-slot').forEach((slotEl) => {
+        slotEl.addEventListener('click', (e) => {
+          if (e.target.closest('.deck-rm-btn')) return;
+          const s = Number(slotEl.getAttribute('data-slot'));
+          cardsState.targetSlot = cardsState.targetSlot === s ? null : s;
+          renderCollectionTab();
+        });
+      });
+
       deckGrid.querySelectorAll('.deck-rm-btn').forEach((btn) => {
         btn.addEventListener('click', async (e) => {
           e.stopPropagation();
           try {
-            await runCardAction({ action: 'deckRemove', slot: Number(btn.getAttribute('data-slot')) }, 'Removed from Showcase Deck.');
+            await runCardAction(
+              { action: 'deckRemove', deckNum: cardsState.activeDeck, slot: Number(btn.getAttribute('data-slot')) },
+              `Removed from Deck ${cardsState.activeDeck}.`
+            );
           } catch (err) {
             showToast(err.message);
           }
@@ -426,7 +466,14 @@
       btn.addEventListener('click', async () => {
         const uid = btn.getAttribute('data-uid');
         try {
-          await runCardAction({ action: 'deckAdd', uid }, `Pinned card #${uid} to your Deck!`);
+          const payload = { action: 'deckAdd', deckNum: cardsState.activeDeck, uid };
+          if (cardsState.targetSlot) payload.slot = cardsState.targetSlot;
+          const res = await runCardAction(
+            payload,
+            `Pinned #${uid} to Deck ${cardsState.activeDeck} Slot #${cardsState.targetSlot || 'next'}!`
+          );
+          if (res?.success) cardsState.targetSlot = null;
+          renderCollectionTab();
         } catch (err) {
           showToast(err.message);
         }
@@ -617,6 +664,47 @@
     document.getElementById('marketRefreshBtn')?.addEventListener('click', loadMarket);
     document.getElementById('packClearBtn')?.addEventListener('click', () => {
       document.getElementById('packResultBox').hidden = true;
+    });
+
+    document.querySelectorAll('#deckTabBtns .tab-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        cardsState.activeDeck = btn.getAttribute('data-dnum') || '1';
+        cardsState.targetSlot = null;
+        renderCollectionTab();
+      });
+    });
+
+    const deckBgInput = document.getElementById('deckBgInput');
+    document.getElementById('deckBgBtn')?.addEventListener('click', () => deckBgInput?.click());
+    deckBgInput?.addEventListener('change', async () => {
+      const file = deckBgInput.files?.[0];
+      deckBgInput.value = '';
+      if (!file) return;
+      try {
+        showToast('Uploading deck background...');
+        const dataUrl = await compressGalleryImage(file, { width: 1080, height: 1350, quality: 0.86 });
+        await runCardAction({ action: 'uploadDeckBg', dataUrl }, 'Deck background updated! Run .deck on WhatsApp to see it!');
+      } catch (err) {
+        showToast(err.message);
+      }
+    });
+
+    document.getElementById('resetDeckBgBtn')?.addEventListener('click', async () => {
+      try {
+        await runCardAction({ action: 'clearDeckBg' }, 'Deck background reset.');
+      } catch (err) {
+        showToast(err.message);
+      }
+    });
+
+    document.getElementById('clearDeckBtn')?.addEventListener('click', async () => {
+      if (!window.confirm(`Clear all 12 slots in Deck ${cardsState.activeDeck}?`)) return;
+      try {
+        cardsState.targetSlot = null;
+        await runCardAction({ action: 'deckClear', deckNum: cardsState.activeDeck }, `Cleared Deck ${cardsState.activeDeck}.`);
+      } catch (err) {
+        showToast(err.message);
+      }
     });
 
     const modal = document.getElementById('cardModal');

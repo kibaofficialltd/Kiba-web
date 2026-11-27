@@ -118,14 +118,34 @@
 
       <div id="colAuthWrap" hidden>
         <div class="panel-card" style="margin-bottom:24px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; margin-bottom:16px;">
             <div>
-              <h2 style="margin:0 0 4px;">📌 6-Slot Showcase Deck</h2>
-              <p class="field-hint" style="margin:0;">Shown on your Profile and WhatsApp <code>.deck</code></p>
+              <h2 style="margin:0 0 4px;">🃏 12-Slot Showcase Decks</h2>
+              <p class="field-hint" style="margin:0;">Tap any empty slot to target it, upload a custom background photo, and run <code>.deck 1</code> / <code>.deck 2</code> / <code>.deck 3</code> on WhatsApp!</p>
             </div>
-            <span class="tier-chip" id="deckCountBadge">0 / 6 Slots</span>
+            <div class="tabs-bar" id="deckTabBtns">
+              <button type="button" class="tab-btn active" data-dnum="1">Deck 1</button>
+              <button type="button" class="tab-btn" data-dnum="2">Deck 2</button>
+              <button type="button" class="tab-btn" data-dnum="3">Deck 3</button>
+            </div>
           </div>
-          <div class="deck-grid" id="myDeckGrid"></div>
+
+          <div class="cards-toolbar" style="margin-bottom:16px;">
+            <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+              <input type="file" id="deckBgInput" accept="image/*" hidden />
+              <button type="button" class="btn btn-sm-ghost" id="deckBgBtn" style="width:auto;">🖼️ Set Deck Background</button>
+              <button type="button" class="btn btn-sm-ghost" id="resetDeckBgBtn" style="width:auto;">Reset BG</button>
+              <button type="button" class="btn btn-sm-ghost" id="clearDeckBtn" style="width:auto;">🧹 Clear Deck</button>
+            </div>
+            <div style="display:flex; gap:8px; align-items:center;">
+              <span class="tier-chip" id="targetSlotChip" hidden>Target: Slot #--</span>
+              <span class="tier-chip" id="deckCountBadge">0 / 12 Slots</span>
+            </div>
+          </div>
+
+          <div class="deck-collage-stage" id="deckCollageStage">
+            <div class="deck-grid-12" id="myDeckGrid"></div>
+          </div>
         </div>
 
         <div class="cards-toolbar" style="margin-bottom:14px;">

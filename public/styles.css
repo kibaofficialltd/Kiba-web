@@ -1973,20 +1973,50 @@ body:not([data-page="home"]) .bg-stage::before {
   gap: 12px;
 }
 
+.deck-collage-stage {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 16px;
+  border-radius: 18px;
+  border: 1px solid rgba(78, 255, 255, 0.25);
+  background-size: cover;
+  background-position: center;
+  background-color: #070b15;
+  box-shadow: 0 20px 44px rgba(2, 6, 15, 0.72);
+}
+
+.deck-grid-12 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
 .deck-slot {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 276 / 386;
   border-radius: 12px;
-  border: 1px dashed rgba(148, 163, 184, 0.28);
-  background: rgba(6, 9, 17, 0.55);
+  border: 1.5px dashed rgba(255, 255, 255, 0.26);
+  background: rgba(6, 9, 17, 0.22);
   overflow: hidden;
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
   font-size: 0.78rem;
-  color: var(--muted);
+  color: rgba(243, 247, 255, 0.85);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.deck-slot:hover,
+.deck-slot.is-targeted {
+  border-color: var(--accent);
+  box-shadow: 0 0 18px rgba(78, 255, 255, 0.42);
+  transform: scale(1.02);
 }
 
 .deck-slot.filled {
