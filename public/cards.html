@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anime Cards — Black Shores</title>
+  <meta name="theme-color" content="#4effff" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body data-page="cards">
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="bg-stage" aria-hidden="true">
+    <div class="bg-aurora bg-aurora-cyan"></div>
+    <div class="bg-aurora bg-aurora-indigo"></div>
+    <div class="bg-aurora bg-aurora-ruby"></div>
+    <div class="bg-grid"></div>
+    <canvas id="shoreCanvas"></canvas>
+  </div>
+
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand">
+        <img src="/assets/thumb.jpg" alt="Shorekeeper" />
+        <span>BLACK SHORES</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/leaderboard">Leaderboard</a>
+        <a href="/lottery">Lottery</a>
+        <a href="/commands">Commands</a>
+        <a href="/cards" class="active">Cards</a>
+        <a href="/profile">Profile</a>
+        <a href="/login" id="navAuthMenuLink">Login / Link</a>
+      </nav>
+
+      <div class="nav-right">
+        <span class="status-badge" id="botStatusPill">
+          <span class="status-dot"></span>
+          <span id="botStatusText">Online</span>
+        </span>
+        <a href="/login" class="btn nav-cta" id="navAuthBtn">Login / Link</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="subpage-top">
+      <div>
+        <h1 class="subpage-title">Anime Card Sanctuary <span id="catalogTotalBadge" style="color:var(--accent); font-size:0.65em;">--</span></h1>
+        <p class="subpage-desc">Catch spawns in WhatsApp groups, summon Gacha Packs with Rubies, showcase a 6-card Deck, and trade on the Market.</p>
+      </div>
+      <div class="wallet-chip" id="cardsWalletChip" hidden>
+        💎 Wallet: <strong id="cardsWalletAmt">0 ♦</strong>
+      </div>
+    </div>
+
+    <div class="tabs-bar cards-tabs-bar" role="tablist">
+      <button class="tab-btn active" data-ctab="catalog">📖 Catalog</button>
+      <button class="tab-btn" data-ctab="packs">🎴 Gacha Packs</button>
+      <button class="tab-btn" data-ctab="collection">🎒 Collection &amp; Deck</button>
+      <button class="tab-btn" data-ctab="market">🏪 Market</button>
+    </div>
+
+    <!-- Tab 1: Catalog -->
+    <section id="tabCatalog" class="cards-tab-panel">
+      <div class="cards-toolbar">
+        <input type="search" id="catalogSearch" class="cmd-search" placeholder="Search character, anime series, or ID..." />
+        <label class="event-toggle">
+          <input type="checkbox" id="catalogEventOnly" />
+          <span>🎉 Event Cards Only</span>
+        </label>
+      </div>
+      <div class="cat-pills" id="catalogTierPills"></div>
+      <div class="anime-card-grid" id="catalogGrid">
+        <div class="empty-note">Loading 42,273 anime cards...</div>
+      </div>
+      <div class="pager-bar" id="catalogPager" hidden>
+        <button type="button" class="btn btn-sm-ghost" id="catPrevBtn">← Prev</button>
+        <span class="pager-label" id="catPageLabel">Page 1 / 1</span>
+        <button type="button" class="btn btn-sm-ghost" id="catNextBtn">Next →</button>
+      </div>
+    </section>
+
+    <!-- Tab 2: Gacha Packs -->
+    <section id="tabPacks" class="cards-tab-panel" hidden>
+      <div id="packsGuestBanner" class="panel-card" hidden style="margin-bottom:24px;">
+        <strong>🔐 Link Required to Summon:</strong>
+        <span style="color:var(--muted);">Link your WhatsApp account via OTP first so summoned cards &amp; Ruby balances sync straight to WhatsApp.</span>
+        <a href="/login" class="btn primary" style="margin-top:14px;">Login / Link WhatsApp</a>
+      </div>
+
+      <div class="packs-grid" id="packsGrid"></div>
+
+      <div id="packResultBox" class="panel-card" hidden style="margin-top:26px;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:18px;">
+          <h2 id="packResultTitle" style="margin:0;">Summoned Cards</h2>
+          <button type="button" class="btn btn-sm-ghost" id="packClearBtn" style="width:auto;">Close</button>
+        </div>
+        <div class="anime-card-grid" id="packResultGrid"></div>
+      </div>
+    </section>
+
+    <!-- Tab 3: Collection & Deck -->
+    <section id="tabCollection" class="cards-tab-panel" hidden>
+      <div id="colGuestBanner" class="panel-card" hidden>
+        <h2 style="margin:0 0 8px;">Your Anime Card Collection</h2>
+        <p class="subpage-desc">Link your WhatsApp account via OTP to view your caught cards, customize your 6-slot Showcase Deck, burn duplicates, or list cards on the Market.</p>
+        <a href="/login" class="btn primary" style="margin-top:16px;">Link WhatsApp Account</a>
+      </div>
+
+      <div id="colAuthWrap" hidden>
+        <div class="panel-card" style="margin-bottom:24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:16px;">
+            <div>
+              <h2 style="margin:0 0 4px;">📌 6-Slot Showcase Deck</h2>
+              <p class="field-hint" style="margin:0;">Shown on your Profile and WhatsApp <code>.deck</code></p>
+            </div>
+            <span class="tier-chip" id="deckCountBadge">0 / 6 Slots</span>
+          </div>
+          <div class="deck-grid" id="myDeckGrid"></div>
+        </div>
+
+        <div class="cards-toolbar" style="margin-bottom:14px;">
+          <input type="search" id="colSearch" class="cmd-search" placeholder="Filter owned cards by name, series, or #UID..." />
+          <div class="tier-chip" id="colSummaryChip">Total: 0</div>
+        </div>
+        <div class="cat-pills" id="colTierPills"></div>
+        <div class="anime-card-grid" id="myCollectionGrid"></div>
+      </div>
+    </section>
+
+    <!-- Tab 4: Card Market -->
+    <section id="tabMarket" class="cards-tab-panel" hidden>
+      <div class="cards-toolbar" style="margin-bottom:14px;">
+        <input type="search" id="marketSearch" class="cmd-search" placeholder="Search market cards by name, series, or #ID..." />
+        <button type="button" class="btn btn-sm-ghost" id="marketRefreshBtn" style="width:auto;">🔄 Refresh</button>
+      </div>
+      <div class="cat-pills" id="marketTierPills"></div>
+      <div class="anime-card-grid" id="marketGrid">
+        <div class="empty-note">Loading market listings...</div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Card Lightbox Modal -->
+  <div class="card-modal-backdrop" id="cardModal" hidden>
+    <div class="panel-card card-modal-box">
+      <button type="button" class="card-modal-close" id="cardModalClose" aria-label="Close">✕</button>
+      <div id="cardModalBody"></div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <span><strong>BLACK SHORES</strong> — Shorekeeper Bot (<span id="footerPhone">+48450424525</span>)</span>
+    <span>KIBA OFFICIAL</span>
+  </footer>
+
+  <div class="toast" id="toast">Done!</div>
+  <script src="/motion.js"></script>
+  <script src="/app.js"></script>
+  <script src="/cards.js"></script>
+</body>
+</html>

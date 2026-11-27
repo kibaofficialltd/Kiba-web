@@ -30,6 +30,7 @@
         <a href="/leaderboard">Leaderboard</a>
         <a href="/lottery">Lottery</a>
         <a href="/commands">Commands</a>
+        <a href="/cards">Cards</a>
         <a href="/profile" class="active">Profile</a>
         <a href="/login" id="navAuthMenuLink">Login / Link</a>
       </nav>
@@ -163,6 +164,19 @@
               <button type="submit" class="btn primary" id="saveProfileBtn">Save &amp; Sync Profile</button>
             </div>
           </form>
+        </div>
+      </div>
+
+      <div class="panel-card" id="profDeckSection">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px; margin-bottom:14px;">
+          <div>
+            <h2 style="margin:0 0 4px;">🃏 Showcase Deck</h2>
+            <p class="field-hint" style="margin:0;">Your pinned anime cards synced with WhatsApp <code>.deck</code></p>
+          </div>
+          <a href="/cards" class="btn btn-sm-ghost" style="width:auto;">Manage Cards &amp; Packs →</a>
+        </div>
+        <div class="deck-grid" id="profDeckGrid">
+          <div class="empty-note">Loading showcase deck...</div>
         </div>
       </div>
 

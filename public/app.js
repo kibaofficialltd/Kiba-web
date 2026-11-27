@@ -98,6 +98,7 @@ async function loadAuthSession() {
   if (state.page === 'profile') {
     renderProfilePage();
   }
+  window.dispatchEvent(new CustomEvent('shore:authReady', { detail: state.authProfile }));
 }
 
 function setMetric(el, value, formatter) {
@@ -574,6 +575,40 @@ function renderProfilePage() {
   }
 
   populateAccountMetrics(p, mainSec);
+  loadProfileShowcaseDeck();
+}
+
+async function loadProfileShowcaseDeck() {
+  const grid = document.getElementById('profDeckGrid');
+  if (!grid || !state.authProfile) return;
+  try {
+    const data = await fetchJson('/api/cards/me');
+    const deck = data.deck || [];
+    if (!deck.length) {
+      grid.innerHTML = '<div class="empty-note">No cards pinned yet. Visit <a href="/cards" style="color:var(--accent)">Anime Cards</a> or run <code>.deck add &lt;uid&gt;</code> on WhatsApp!</div>';
+      return;
+    }
+    grid.innerHTML = deck
+      .map((card, i) => {
+        const rawUrl = String(card.img || '');
+        const thumbUrl = card.webp || (rawUrl.toLowerCase().endsWith('.webm') ? '' : rawUrl);
+        const media = rawUrl.toLowerCase().endsWith('.webm') && !card.webp
+          ? `<video class="deck-slot-img" src="${escapeHtml(rawUrl)}" autoplay loop muted playsinline preload="metadata"></video>`
+          : `<img class="deck-slot-img" src="${escapeHtml(thumbUrl || rawUrl)}" alt="${escapeHtml(card.name)}" loading="lazy" referrerpolicy="no-referrer" />`;
+        return `
+          <div class="deck-slot filled tier-${escapeHtml(card.tier)}">
+            ${media}
+            <div class="deck-slot-overlay">
+              <span class="deck-slot-num">#${i + 1} • ${escapeHtml(card.tier === 'S' ? 'S' : `T${card.tier}`)}</span>
+            </div>
+            <div class="deck-slot-name">${escapeHtml(card.name)}</div>
+          </div>
+        `;
+      })
+      .join('');
+  } catch {
+    grid.innerHTML = '<div class="empty-note">Showcase Deck offline right now.</div>';
+  }
 }
 
 function setupProfilePage() {

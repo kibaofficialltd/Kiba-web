@@ -1726,6 +1726,398 @@ body:not([data-page="home"]) .bg-stage::before {
   flex-wrap: wrap;
 }
 
+/* Anime Cards System & Gacha Sanctuary */
+.cards-promo-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.cards-promo-left {
+  flex: 1 1 380px;
+}
+
+.cards-promo-actions {
+  flex-shrink: 0;
+}
+
+.wallet-chip {
+  background: var(--card);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 92, 124, 0.35);
+  border-radius: 999px;
+  padding: 9px 18px;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.wallet-chip strong {
+  color: var(--ruby);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.cards-tabs-bar {
+  flex-wrap: wrap;
+}
+
+.cards-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.event-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.event-toggle input {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+}
+
+.anime-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 18px;
+}
+
+.anime-card {
+  position: relative;
+  background: rgba(14, 20, 35, 0.82);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.anime-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(78, 255, 255, 0.45);
+  box-shadow: 0 14px 32px rgba(2, 6, 16, 0.65);
+}
+
+.anime-card.tier-S {
+  border-color: rgba(78, 255, 255, 0.55);
+  box-shadow: 0 0 24px rgba(78, 255, 255, 0.16);
+}
+
+.anime-card.tier-6 {
+  border-color: rgba(255, 92, 124, 0.5);
+  box-shadow: 0 0 20px rgba(255, 92, 124, 0.14);
+}
+
+.anime-card.tier-5 {
+  border-color: rgba(251, 191, 36, 0.42);
+}
+
+.anime-card-frame {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  background: #070b15;
+  overflow: hidden;
+}
+
+.anime-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.anime-tier-tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(6, 9, 17, 0.84);
+  border: 1px solid rgba(160, 215, 255, 0.3);
+  backdrop-filter: blur(6px);
+}
+
+.anime-event-tag {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: rgba(6, 9, 17, 0.84);
+  color: #fde68a;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+}
+
+.anime-card-meta {
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.anime-card-title {
+  margin: 0;
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.anime-card-series {
+  font-size: 0.78rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.anime-card-foot {
+  margin-top: auto;
+  padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.76rem;
+  color: #cbd5e1;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.owned-actions-row {
+  margin-top: auto;
+  padding-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.btn-mini {
+  padding: 5px 9px;
+  font-size: 0.73rem;
+  border-radius: 8px;
+  width: auto;
+  margin-top: 0;
+}
+
+.packs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.pack-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+  align-items: center;
+}
+
+.pack-emoji {
+  font-size: 2.6rem;
+}
+
+.pack-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.pack-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+  flex: 1;
+}
+
+.pack-price {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  font-size: 1.35rem;
+  color: var(--ruby);
+  margin: 6px 0;
+}
+
+.deck-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.deck-slot {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 12px;
+  border: 1px dashed rgba(148, 163, 184, 0.28);
+  background: rgba(6, 9, 17, 0.55);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.deck-slot.filled {
+  border-style: solid;
+  border-color: rgba(78, 255, 255, 0.35);
+}
+
+.deck-slot-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.deck-slot-overlay {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  right: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.deck-slot-num {
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: rgba(6, 9, 17, 0.82);
+  color: var(--accent);
+}
+
+.deck-rm-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 92, 124, 0.9);
+  color: #fff;
+  font-size: 0.72rem;
+  cursor: pointer;
+}
+
+.deck-slot-name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 18px 8px 6px;
+  background: linear-gradient(180deg, transparent, rgba(6, 9, 17, 0.94));
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.pager-bar {
+  margin-top: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.pager-bar .btn {
+  width: auto;
+}
+
+.pager-label {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.card-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(3, 6, 12, 0.82);
+  backdrop-filter: blur(8px);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.card-modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.card-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: rgba(6, 9, 17, 0.85);
+  color: var(--text);
+  font-size: 1rem;
+  cursor: pointer;
+  z-index: 4;
+}
+
+.card-modal-grid {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.card-modal-media {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  display: block;
+}
+
+.tier-pill-badge {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: rgba(6, 9, 17, 0.65);
+}
+
 /* Scroll & Dynamic Motion Reveals */
 .has-motion .reveal-ready {
   opacity: 0;
@@ -1902,6 +2294,16 @@ body:not([data-page="home"]) .bg-stage::before {
   }
   .biz-editor-actions .btn {
     width: 100%;
+  }
+  .deck-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .anime-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .card-modal-grid {
+    grid-template-columns: 1fr;
   }
 }
 

@@ -129,7 +129,7 @@ export default async function handler(req, res) {
     return sendJson(res, { success: true });
   }
 
-  if (pathname.startsWith('/api/auth/') || pathname.startsWith('/api/profile')) {
+  if (pathname.startsWith('/api/auth/') || pathname.startsWith('/api/profile') || pathname.startsWith('/api/cards')) {
     if (pathname === '/api/profile-media') {
       res.statusCode = 404;
       res.end('Not Found');
