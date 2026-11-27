@@ -85,6 +85,15 @@ async function loadAuthSession() {
   }
 }
 
+function setMetric(el, value, formatter) {
+  if (!el) return;
+  if (window.ShoreMotion && typeof window.ShoreMotion.animateText === 'function') {
+    window.ShoreMotion.animateText(el, value, formatter);
+  } else {
+    el.textContent = formatter(value);
+  }
+}
+
 async function loadOverview() {
   try {
     const data = await fetchJson('/api/overview');
@@ -112,10 +121,10 @@ async function loadOverview() {
       const lotteryEl = document.getElementById('statLottery');
       const cmdsEl = document.getElementById('statCommands');
 
-      if (usersEl) usersEl.textContent = formatNumber(data.stats.registeredUsers);
-      if (rubiesEl) rubiesEl.textContent = formatCompact(data.stats.totalRubies);
-      if (lotteryEl) lotteryEl.textContent = `#${data.stats.lotteryRound}`;
-      if (cmdsEl) cmdsEl.textContent = `${data.stats.totalCommands}`;
+      setMetric(usersEl, data.stats.registeredUsers, (v) => formatNumber(v));
+      setMetric(rubiesEl, data.stats.totalRubies, (v) => formatCompact(v));
+      setMetric(lotteryEl, data.stats.lotteryRound, (v) => `#${v}`);
+      setMetric(cmdsEl, data.stats.totalCommands, (v) => `${v}`);
 
       const groupBtn = document.getElementById('cardGroupBtn');
       const groupDesc = document.getElementById('groupCardDesc');
@@ -186,6 +195,8 @@ function renderLeaderboard() {
       `;
     })
     .join('');
+
+  window.ShoreMotion?.animateListItems?.(container, '.lb-row');
 
   if (legend) {
     if (state.lbMode === 'rank' && Array.isArray(data.tiers)) {
@@ -299,6 +310,8 @@ function renderCommands() {
       }
     });
   });
+
+  window.ShoreMotion?.animateListItems?.(grid, '.cmd-card');
 }
 
 async function loadCommands() {
@@ -368,10 +381,11 @@ function renderAuthPage() {
 
   document.getElementById('accName').textContent = p.name;
   document.getElementById('accBio').textContent = p.bio;
-  document.getElementById('accWallet').textContent = formatNumber(p.wallet);
-  document.getElementById('accBank').textContent = formatNumber(p.bank);
-  document.getElementById('accTotal').textContent = formatNumber(p.totalWealth);
-  document.getElementById('accTickets').textContent = formatNumber(p.lotteryTickets);
+  setMetric(document.getElementById('accWallet'), p.wallet, (v) => formatNumber(v));
+  setMetric(document.getElementById('accBank'), p.bank, (v) => formatNumber(v));
+  setMetric(document.getElementById('accTotal'), p.totalWealth, (v) => formatNumber(v));
+  setMetric(document.getElementById('accTickets'), p.lotteryTickets, (v) => formatNumber(v));
+  window.ShoreMotion?.observeReveals?.(accSec);
 
   document.getElementById('accRank').textContent = p.rank;
   document.getElementById('accStanding').textContent = p.standing ? `#${p.standing.position} of ${p.standing.total}` : '--';

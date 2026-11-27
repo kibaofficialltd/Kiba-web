@@ -9,6 +9,15 @@
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body data-page="login">
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="bg-stage" aria-hidden="true">
+    <div class="bg-aurora bg-aurora-cyan"></div>
+    <div class="bg-aurora bg-aurora-indigo"></div>
+    <div class="bg-aurora bg-aurora-ruby"></div>
+    <div class="bg-grid"></div>
+    <canvas id="shoreCanvas"></canvas>
+  </div>
+
   <header class="navbar">
     <div class="nav-inner">
       <a href="/" class="brand">
@@ -150,6 +159,7 @@
     <span>KIBA OFFICIAL</span>
   </footer>
 
+  <script src="/motion.js"></script>
   <script src="/app.js"></script>
 </body>
 </html>

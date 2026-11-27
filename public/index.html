@@ -10,6 +10,15 @@
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body data-page="home">
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="bg-stage" aria-hidden="true">
+    <div class="bg-aurora bg-aurora-cyan"></div>
+    <div class="bg-aurora bg-aurora-indigo"></div>
+    <div class="bg-aurora bg-aurora-ruby"></div>
+    <div class="bg-grid"></div>
+    <canvas id="shoreCanvas"></canvas>
+  </div>
+
   <header class="navbar">
     <div class="nav-inner">
       <a href="/" class="brand">
@@ -38,9 +47,17 @@
 
   <!-- Hero Section -->
   <section class="hero">
+    <div class="hero-media" aria-hidden="true">
+      <div class="hero-media-drift">
+        <img src="/assets/hero.jpg" alt="Shorekeeper holding a crimson Ruby in Black Shores" class="hero-bg-img" />
+      </div>
+      <div class="hero-prism-ring"></div>
+    </div>
+    <div class="hero-scrim" aria-hidden="true"></div>
     <div class="hero-inner">
       <div class="hero-content">
-        <h1>Welcome to Black Shores</h1>
+        <div class="hero-badge"><span class="pulse-star">✦</span> Tethys System &bull; Black Shores</div>
+        <h1>Welcome to <span class="hero-title-accent">Black Shores</span></h1>
         <p>
           The home of <strong>Shorekeeper AI</strong>. Earn <strong>Rubies</strong>, catch <strong>Ruby Rain</strong> drops, win the 2-Hour Jackpot, and create WhatsApp <strong>Audio Stickers</strong>.
         </p>
@@ -48,6 +65,7 @@
           <a href="https://wa.me/48450424525" target="_blank" rel="noopener noreferrer" class="btn primary" id="heroChatBtn">
             💬 Chat with Shorekeeper
           </a>
+          <a href="/commands" class="btn hero-ghost">Explore Commands →</a>
         </div>
       </div>
     </div>
@@ -61,7 +79,7 @@
         <div class="stat-value" id="statUsers">--</div>
         <div class="stat-label">Travelers</div>
       </div>
-      <div class="stat-card">
+      <div class="stat-card is-ruby">
         <div class="stat-value ruby" id="statRubies">--</div>
         <div class="stat-label">♦ Total Rubies</div>
       </div>
@@ -86,7 +104,8 @@
           <a href="/commands?cat=ai" class="btn">Explore AI Commands</a>
         </div>
 
-        <div class="feature-panel">
+        <div class="feature-panel ruby-accent">
+          <img src="/assets/ruby.png" alt="" class="card-ruby-prism" loading="lazy" aria-hidden="true" />
           <div class="feature-icon">💎</div>
           <h3 class="feature-title">Ruby Economy &amp; Ranks</h3>
           <p class="feature-desc">Register for a 40,000 ♦ gift. Work shifts, mine crystals, store savings in your bank, and ascend 6 Rank Tiers.</p>
@@ -151,6 +170,7 @@
     <span>KIBA OFFICIAL</span>
   </footer>
 
+  <script src="/motion.js"></script>
   <script src="/app.js"></script>
 </body>
 </html>
