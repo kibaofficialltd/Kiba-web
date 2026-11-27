@@ -62,6 +62,28 @@ async function fetchJson(url, opts = {}) {
 function updateNavAuthUi(profile) {
   const navBtn = document.getElementById('navAuthBtn');
   const navMenu = document.getElementById('navAuthMenuLink');
+  const navLinks = document.getElementById('navLinks');
+
+  let adminLink = document.getElementById('navAdminLink');
+  if (profile?.isAdminPortalAllowed || profile?.canSummonPack) {
+    if (!adminLink && navLinks) {
+      adminLink = document.createElement('a');
+      adminLink.id = 'navAdminLink';
+      adminLink.href = '/admin';
+      adminLink.textContent = 'Admin';
+      if (state.page === 'admin') adminLink.classList.add('active');
+      const profileLink = navLinks.querySelector('a[href="/profile"]');
+      if (profileLink && profileLink.nextSibling) {
+        navLinks.insertBefore(adminLink, profileLink.nextSibling);
+      } else {
+        navLinks.appendChild(adminLink);
+      }
+    }
+    if (adminLink) adminLink.hidden = false;
+  } else if (adminLink) {
+    adminLink.hidden = true;
+  }
+
   if (profile) {
     const label = `👤 ${profile.name}`;
     if (navBtn) {

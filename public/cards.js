@@ -4,7 +4,12 @@
 (() => {
   if (document.body?.dataset?.page !== 'cards') return;
 
-  const TIER_KEYS = ['all', 'S', '6', '5', '4', '3', '2', '1'];
+  const TIER_KEYS = ['all', 'LR', 'S', 'UR', 'SSR', '6', 'SR', '5', '4', 'R', '3', '2', 'C', '1'];
+
+  function formatTierTag(t) {
+    const s = String(t || '1');
+    return /^\d+$/.test(s) ? `T${s}` : s;
+  }
 
   const cardsState = {
     activeTab: 'catalog',
@@ -87,7 +92,7 @@
     const el = document.getElementById(containerId);
     if (!el) return;
     el.innerHTML = TIER_KEYS.map((t) => {
-      const label = t === 'all' ? 'All' : t === 'S' ? '💠 Tier S' : `Tier ${t}`;
+      const label = t === 'all' ? 'All' : t === 'S' ? '💠 Tier S' : t === 'LR' ? '👑 LR' : /^\d+$/.test(t) ? `Tier ${t}` : t;
       const countStr = countsMap && t !== 'all' && countsMap[t] !== undefined ? ` (${formatNumber(countsMap[t])})` : '';
       return `<button type="button" class="cat-pill ${activeTier === t ? 'active' : ''}" data-tier="${t}">${label}${countStr}</button>`;
     }).join('');
@@ -139,7 +144,7 @@
             <article class="anime-card tier-${escapeHtml(c.tier)}" data-cidx="${idx}">
               <div class="anime-card-frame">
                 ${renderCardMediaHtml(c)}
-                <span class="anime-tier-tag" style="color:${escapeHtml(c.tierColor)}; border-color:${escapeHtml(c.tierColor)}55;">${escapeHtml(c.tier === 'S' ? 'S' : `T${c.tier}`)}${c.animated ? ' ⚡' : ''}</span>
+                <span class="anime-tier-tag" style="color:${escapeHtml(c.tierColor)}; border-color:${escapeHtml(c.tierColor)}55;">${escapeHtml(formatTierTag(c.tier))}${c.animated ? ' ⚡' : ''}</span>
                 ${c.event ? `<span class="anime-event-tag">🎉 ${escapeHtml(c.event)}</span>` : ''}
               </div>
               <div class="anime-card-meta">
@@ -257,7 +262,7 @@
           <article class="anime-card tier-${escapeHtml(c.tier)}" data-pidx="${idx}">
             <div class="anime-card-frame">
               ${renderCardMediaHtml(c)}
-              <span class="anime-tier-tag" style="color:${escapeHtml(c.tierColor)}; border-color:${escapeHtml(c.tierColor)}55;">${escapeHtml(c.tier === 'S' ? 'S' : `T${c.tier}`)}</span>
+              <span class="anime-tier-tag" style="color:${escapeHtml(c.tierColor)}; border-color:${escapeHtml(c.tierColor)}55;">${escapeHtml(formatTierTag(c.tier))}</span>
             </div>
             <div class="anime-card-meta">
               <h3 class="anime-card-title">${escapeHtml(c.name)}</h3>
@@ -371,7 +376,7 @@
             <div class="deck-slot filled tier-${escapeHtml(card.tier)} ${isTarget ? 'is-targeted' : ''}" data-slot="${i + 1}">
               ${renderCardMediaHtml(card, 'deck-slot-img')}
               <div class="deck-slot-overlay">
-                <span class="deck-slot-num">#${i + 1} • ${escapeHtml(card.tier === 'S' ? 'S' : `T${card.tier}`)}</span>
+                <span class="deck-slot-num">#${i + 1} • ${escapeHtml(formatTierTag(card.tier))}</span>
                 <button type="button" class="deck-rm-btn" data-slot="${i + 1}" title="Remove from deck">✕</button>
               </div>
               <div class="deck-slot-name">${escapeHtml(card.name)}</div>
@@ -438,7 +443,7 @@
           <article class="anime-card owned tier-${escapeHtml(c.tier)}" data-oidx="${idx}">
             <div class="anime-card-frame">
               ${renderCardMediaHtml(c)}
-              <span class="anime-tier-tag" style="color:${escapeHtml(c.tierColor)}; border-color:${escapeHtml(c.tierColor)}55;">#${escapeHtml(c.uid)} • ${escapeHtml(c.tier === 'S' ? 'S' : `T${c.tier}`)}</span>
+              <span class="anime-tier-tag" style="color:${escapeHtml(c.tierColor)}; border-color:${escapeHtml(c.tierColor)}55;">#${escapeHtml(c.uid)} • ${escapeHtml(formatTierTag(c.tier))}</span>
             </div>
             <div class="anime-card-meta">
               <h3 class="anime-card-title">${escapeHtml(c.name)}</h3>
@@ -550,7 +555,7 @@
           <article class="anime-card tier-${escapeHtml(l.tier)}" data-midx="${idx}">
             <div class="anime-card-frame">
               ${renderCardMediaHtml(l)}
-              <span class="anime-tier-tag" style="color:${escapeHtml(l.tierColor || '#4effff')};">ID #${escapeHtml(l.id)} • ${escapeHtml(l.tier === 'S' ? 'S' : `T${l.tier}`)}</span>
+              <span class="anime-tier-tag" style="color:${escapeHtml(l.tierColor || '#4effff')};">ID #${escapeHtml(l.id)} • ${escapeHtml(formatTierTag(l.tier))}</span>
             </div>
             <div class="anime-card-meta">
               <h3 class="anime-card-title">${escapeHtml(l.name)}</h3>

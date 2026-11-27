@@ -1821,18 +1821,29 @@ body:not([data-page="home"]) .bg-stage::before {
   box-shadow: 0 14px 32px rgba(2, 6, 16, 0.65);
 }
 
+.anime-card.tier-LR {
+  border-color: rgba(255, 59, 129, 0.6);
+  box-shadow: 0 0 26px rgba(255, 59, 129, 0.22);
+}
+
 .anime-card.tier-S {
   border-color: rgba(78, 255, 255, 0.55);
   box-shadow: 0 0 24px rgba(78, 255, 255, 0.16);
 }
 
+.anime-card.tier-UR,
 .anime-card.tier-6 {
   border-color: rgba(255, 92, 124, 0.5);
   box-shadow: 0 0 20px rgba(255, 92, 124, 0.14);
 }
 
+.anime-card.tier-SSR,
 .anime-card.tier-5 {
   border-color: rgba(251, 191, 36, 0.42);
+}
+
+.anime-card.tier-SR {
+  border-color: rgba(168, 85, 247, 0.42);
 }
 
 .anime-card-frame {
@@ -2533,6 +2544,98 @@ body:not([data-page="home"]) .bg-stage::before {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .ads-tier-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Admin Portal */
+.admin-top-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.admin-select {
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(9, 14, 28, 0.9);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 0.9rem;
+}
+.admin-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.admin-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.admin-row-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.admin-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-size: 0.84rem;
+  color: var(--muted);
+}
+.admin-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.adm-pill {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 9px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+.adm-pill.adm-owner {
+  color: var(--accent);
+  border-color: rgba(78, 255, 255, 0.4);
+  background: rgba(78, 255, 255, 0.12);
+}
+.adm-pill.adm-mod {
+  color: #a78bfa;
+  border-color: rgba(167, 139, 250, 0.45);
+  background: rgba(167, 139, 250, 0.14);
+}
+.adm-pill.adm-banned {
+  color: #ff6b81;
+  border-color: rgba(255, 107, 129, 0.45);
+  background: rgba(255, 107, 129, 0.15);
+}
+.adm-pill.adm-afk {
+  color: #fbbf24;
+  border-color: rgba(251, 191, 36, 0.4);
+}
+.btn-danger-ghost {
+  border-color: rgba(255, 92, 138, 0.45) !important;
+  color: #ff8aa8 !important;
+}
+.admin-sys-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+@media (max-width: 780px) {
+  .admin-sys-grid {
     grid-template-columns: 1fr;
   }
 }
