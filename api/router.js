@@ -65,21 +65,31 @@ export default async function handler(req, res) {
         'ngrok-skip-browser-warning': 'true'
       };
 
-      const fetchOpts = {
+      const makeFetchOpts = () => ({
         method: req.method || 'GET',
         headers,
-        signal: AbortSignal.timeout(8000)
-      };
+        signal: AbortSignal.timeout(22000)
+      });
 
+      let rawBody = '';
       if (req.method !== 'GET' && req.method !== 'HEAD') {
-        const rawBody = await readBody(req);
+        rawBody = await readBody(req);
         if (rawBody) {
           headers['content-type'] = 'application/json';
-          fetchOpts.body = rawBody;
         }
       }
 
-      const upstream = await fetch(target, fetchOpts);
+      let upstream;
+      try {
+        const opts = makeFetchOpts();
+        if (rawBody) opts.body = rawBody;
+        upstream = await fetch(target, opts);
+      } catch (firstErr) {
+        await new Promise((r) => setTimeout(r, 400));
+        const optsRetry = makeFetchOpts();
+        if (rawBody) optsRetry.body = rawBody;
+        upstream = await fetch(target, optsRetry);
+      }
       const ct = upstream.headers.get('content-type') || '';
 
       if (ct.includes('application/json')) {
