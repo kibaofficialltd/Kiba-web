@@ -1,0 +1,1577 @@
+{
+  "generatedAt": "2026-11-27T02:29:29.699Z",
+  "overview": {
+    "botName": "Shorekeeper",
+    "botVersion": "1.0.0",
+    "ownerName": "Kiba sama",
+    "prefix": ".",
+    "online": false,
+    "botPhone": "+48450424525",
+    "uptimeSeconds": 1418,
+    "stats": {
+      "registeredUsers": 7,
+      "totalRubies": 3104546,
+      "totalMessages": 673,
+      "totalCommands": 100,
+      "totalCategories": 11,
+      "activeRubyRain": false,
+      "lotteryRound": 20,
+      "lotterySlotsFilled": 1,
+      "lotteryMaxSlots": 10
+    },
+    "links": {
+      "botWhatsAppUrl": "https://wa.me/48450424525",
+      "groupInviteUrl": "",
+      "discordUrl": ""
+    }
+  },
+  "leaderboards": {
+    "totalTravelers": 7,
+    "rich": [
+      {
+        "position": 1,
+        "name": "GOAT ZAYN",
+        "wallet": 26,
+        "bank": 1550198,
+        "totalWealth": 1550224,
+        "rank": "👑 Sovereign of Stars",
+        "messagesCount": 224,
+        "lotteryTickets": 199
+      },
+      {
+        "position": 2,
+        "name": "kiba",
+        "wallet": 391516,
+        "bank": 335190,
+        "totalWealth": 726706,
+        "rank": "💎 Diamond Resonator",
+        "messagesCount": 301,
+        "lotteryTickets": 0
+      },
+      {
+        "position": 3,
+        "name": "Benya",
+        "wallet": 386945,
+        "bank": 0,
+        "totalWealth": 386945,
+        "rank": "✨ Stellar Pathfinder",
+        "messagesCount": 38,
+        "lotteryTickets": 6
+      },
+      {
+        "position": 4,
+        "name": "James",
+        "wallet": 310062,
+        "bank": 0,
+        "totalWealth": 310062,
+        "rank": "✨ Stellar Pathfinder",
+        "messagesCount": 39,
+        "lotteryTickets": 0
+      },
+      {
+        "position": 5,
+        "name": "kiba's husband",
+        "wallet": 60606,
+        "bank": 0,
+        "totalWealth": 60606,
+        "rank": "🌟 Rising Stargazer",
+        "messagesCount": 68,
+        "lotteryTickets": 0
+      },
+      {
+        "position": 6,
+        "name": "Kiboy Bihari",
+        "wallet": 40000,
+        "bank": 0,
+        "totalWealth": 40000,
+        "rank": "🌱 Novice Wanderer",
+        "messagesCount": 0,
+        "lotteryTickets": 0
+      },
+      {
+        "position": 7,
+        "name": "zaynrendi",
+        "wallet": 30003,
+        "bank": 0,
+        "totalWealth": 30003,
+        "rank": "🌱 Novice Wanderer",
+        "messagesCount": 3,
+        "lotteryTickets": 10
+      }
+    ],
+    "rank": [
+      {
+        "position": 1,
+        "name": "GOAT ZAYN",
+        "wallet": 26,
+        "bank": 1550198,
+        "totalWealth": 1550224,
+        "rank": "👑 Sovereign of Stars",
+        "messagesCount": 224,
+        "lotteryTickets": 199
+      },
+      {
+        "position": 2,
+        "name": "kiba",
+        "wallet": 391516,
+        "bank": 335190,
+        "totalWealth": 726706,
+        "rank": "💎 Diamond Resonator",
+        "messagesCount": 301,
+        "lotteryTickets": 0
+      },
+      {
+        "position": 3,
+        "name": "Benya",
+        "wallet": 386945,
+        "bank": 0,
+        "totalWealth": 386945,
+        "rank": "✨ Stellar Pathfinder",
+        "messagesCount": 38,
+        "lotteryTickets": 6
+      },
+      {
+        "position": 4,
+        "name": "James",
+        "wallet": 310062,
+        "bank": 0,
+        "totalWealth": 310062,
+        "rank": "✨ Stellar Pathfinder",
+        "messagesCount": 39,
+        "lotteryTickets": 0
+      },
+      {
+        "position": 5,
+        "name": "kiba's husband",
+        "wallet": 60606,
+        "bank": 0,
+        "totalWealth": 60606,
+        "rank": "🌟 Rising Stargazer",
+        "messagesCount": 68,
+        "lotteryTickets": 0
+      },
+      {
+        "position": 6,
+        "name": "Kiboy Bihari",
+        "wallet": 40000,
+        "bank": 0,
+        "totalWealth": 40000,
+        "rank": "🌱 Novice Wanderer",
+        "messagesCount": 0,
+        "lotteryTickets": 0
+      },
+      {
+        "position": 7,
+        "name": "zaynrendi",
+        "wallet": 30003,
+        "bank": 0,
+        "totalWealth": 30003,
+        "rank": "🌱 Novice Wanderer",
+        "messagesCount": 3,
+        "lotteryTickets": 10
+      }
+    ],
+    "shame": [
+      {
+        "position": 1,
+        "name": "zaynrendi",
+        "wallet": 30003,
+        "bank": 0,
+        "totalWealth": 30003,
+        "rank": "🌱 Novice Wanderer",
+        "messagesCount": 3,
+        "lotteryTickets": 10
+      },
+      {
+        "position": 2,
+        "name": "Kiboy Bihari",
+        "wallet": 40000,
+        "bank": 0,
+        "totalWealth": 40000,
+        "rank": "🌱 Novice Wanderer",
+        "messagesCount": 0,
+        "lotteryTickets": 0
+      },
+      {
+        "position": 3,
+        "name": "kiba's husband",
+        "wallet": 60606,
+        "bank": 0,
+        "totalWealth": 60606,
+        "rank": "🌟 Rising Stargazer",
+        "messagesCount": 68,
+        "lotteryTickets": 0
+      },
+      {
+        "position": 4,
+        "name": "James",
+        "wallet": 310062,
+        "bank": 0,
+        "totalWealth": 310062,
+        "rank": "✨ Stellar Pathfinder",
+        "messagesCount": 39,
+        "lotteryTickets": 0
+      },
+      {
+        "position": 5,
+        "name": "Benya",
+        "wallet": 386945,
+        "bank": 0,
+        "totalWealth": 386945,
+        "rank": "✨ Stellar Pathfinder",
+        "messagesCount": 38,
+        "lotteryTickets": 6
+      },
+      {
+        "position": 6,
+        "name": "kiba",
+        "wallet": 391516,
+        "bank": 335190,
+        "totalWealth": 726706,
+        "rank": "💎 Diamond Resonator",
+        "messagesCount": 301,
+        "lotteryTickets": 0
+      },
+      {
+        "position": 7,
+        "name": "GOAT ZAYN",
+        "wallet": 26,
+        "bank": 1550198,
+        "totalWealth": 1550224,
+        "rank": "👑 Sovereign of Stars",
+        "messagesCount": 224,
+        "lotteryTickets": 199
+      }
+    ],
+    "tiers": [
+      {
+        "min": 1000000,
+        "title": "👑 Sovereign of Stars"
+      },
+      {
+        "min": 500000,
+        "title": "💎 Diamond Resonator"
+      },
+      {
+        "min": 200000,
+        "title": "✨ Stellar Pathfinder"
+      },
+      {
+        "min": 100000,
+        "title": "⚔️ Veteran Traveler"
+      },
+      {
+        "min": 50000,
+        "title": "🌟 Rising Stargazer"
+      },
+      {
+        "min": 0,
+        "title": "🌱 Novice Wanderer"
+      }
+    ]
+  },
+  "lottery": {
+    "roundId": 20,
+    "remainingMs": 1273018,
+    "ticketPrice": 1000,
+    "maxSlots": 10,
+    "totalSlots": 1,
+    "slots": [
+      {
+        "slot": 1,
+        "name": "Benya",
+        "enteredAt": 1795742930811
+      }
+    ],
+    "lastDraw": {
+      "roundId": 19,
+      "drawnAt": 1795740642690,
+      "totalParticipants": 1,
+      "winners": [
+        {
+          "rank": "Solo Champion (#1, #2, #3)",
+          "name": "Benya",
+          "prize": 190000
+        }
+      ]
+    }
+  },
+  "commands": {
+    "prefix": ".",
+    "total": 100,
+    "categories": {
+      "ai": [
+        {
+          "name": "ai",
+          "aliases": [
+            "ask",
+            "shorekeeper",
+            "chat"
+          ],
+          "category": "ai",
+          "description": "Converse with Shorekeeper directly",
+          "usage": "!ai <your message>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "imagine",
+          "aliases": [
+            "dalle",
+            "generateimg",
+            "genimg"
+          ],
+          "category": "ai",
+          "description": "Generate high quality AI images from any prompt",
+          "usage": "!imagine <prompt description>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "tts",
+          "aliases": [
+            "say",
+            "speak"
+          ],
+          "category": "ai",
+          "description": "Convert text to speech voice note",
+          "usage": "!tts [lang_code] <text>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        }
+      ],
+      "anime": [
+        {
+          "name": "neko",
+          "aliases": [
+            "catgirl"
+          ],
+          "category": "anime",
+          "description": "Get a cute random anime catgirl (neko) image (100% SFW)",
+          "usage": "!neko",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "shorekeeper",
+          "aliases": [
+            "sk",
+            "shoresticker",
+            "sksticker"
+          ],
+          "category": "anime",
+          "description": "Send a random Shorekeeper sticker from the Black Shores",
+          "usage": "!sk",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "waifu",
+          "aliases": [],
+          "category": "anime",
+          "description": "Get a cute random anime waifu image (100% SFW)",
+          "usage": "!waifu",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        }
+      ],
+      "converter": [
+        {
+          "name": "audiosticker",
+          "aliases": [
+            "as",
+            "soundsticker",
+            "asticker",
+            "stikersound"
+          ],
+          "category": "converter",
+          "description": "Create WhatsApp Sound Stickers (use .as crop for auto 1:1 square crop)",
+          "usage": ".as or .as crop (send/reply to video, or pair image/sticker + audio)",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "carbon",
+          "aliases": [
+            "rayso",
+            "codeimg"
+          ],
+          "category": "converter",
+          "description": "Generate an aesthetic code snippet image (Carbon / Ray.so)",
+          "usage": "!carbon <code> or reply to a code message",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "fancy",
+          "aliases": [
+            "font",
+            "styletext"
+          ],
+          "category": "converter",
+          "description": "Convert plain text into cool fancy font styles",
+          "usage": "!fancy <text>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "sticker",
+          "aliases": [
+            "s",
+            "qc",
+            "quotly",
+            "stiker"
+          ],
+          "category": "converter",
+          "description": "Convert replied image/video to sticker (or .s crop for square) or text to Quote Sticker",
+          "usage": "!s, !s crop, or reply .s to any text/image/video",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "take",
+          "aliases": [
+            "steal",
+            "wm",
+            "setwm"
+          ],
+          "category": "converter",
+          "description": "Steal any sticker (or audio sticker) with your registered name as the author",
+          "usage": "Reply to any sticker with .take or .take <pack name>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        }
+      ],
+      "download": [
+        {
+          "name": "fb",
+          "aliases": [
+            "facebook",
+            "fbdl"
+          ],
+          "category": "download",
+          "description": "Download Facebook video",
+          "usage": "!fb <facebook url>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "ig",
+          "aliases": [
+            "instagram",
+            "igdl",
+            "reel"
+          ],
+          "category": "download",
+          "description": "Download Instagram reel, video, or photo post",
+          "usage": "!ig <instagram url> (or reply .ig to a link)",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "play",
+          "aliases": [
+            "song",
+            "music",
+            "mp3"
+          ],
+          "category": "download",
+          "description": "Search and download full song audio track from YouTube",
+          "usage": "!play <song name or url>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "reddit",
+          "aliases": [
+            "reddittor",
+            "reddl"
+          ],
+          "category": "download",
+          "description": "Download Reddit video",
+          "usage": "!reddit <reddit url>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "ttk",
+          "aliases": [
+            "tiktok",
+            "tt",
+            "ttdl"
+          ],
+          "category": "download",
+          "description": "Download TikTok video without watermark",
+          "usage": "!ttk <tiktok url>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "x",
+          "aliases": [
+            "twitter",
+            "twdl",
+            "xdl"
+          ],
+          "category": "download",
+          "description": "Download Twitter / X video",
+          "usage": "!x <twitter or x url>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "yt",
+          "aliases": [
+            "youtube",
+            "ytv",
+            "yta"
+          ],
+          "category": "download",
+          "description": "Download YouTube video or audio",
+          "usage": "!yt <youtube url> [--mp3]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        }
+      ],
+      "economy": [
+        {
+          "name": "balance",
+          "aliases": [
+            "bal",
+            "rubies",
+            "wallet"
+          ],
+          "category": "economy",
+          "description": "Check your current Ruby balance and bank vault",
+          "usage": "!balance or !balance @user",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "claim",
+          "aliases": [
+            "catch",
+            "grab",
+            "claimruby",
+            "rain"
+          ],
+          "category": "economy",
+          "description": "Catch falling rubies during an active 1-minute Ruby Rain storm",
+          "usage": "!claim",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "daily",
+          "aliases": [
+            "claimdaily"
+          ],
+          "category": "economy",
+          "description": "Claim your daily 5,000 Ruby gift from Shorekeeper (Cooldown: 24 hours)",
+          "usage": "!daily",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "deposit",
+          "aliases": [
+            "dep"
+          ],
+          "category": "economy",
+          "description": "Deposit Rubies from your pocket into your secure Bank Vault",
+          "usage": "!deposit <amount> or !deposit all",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "donate",
+          "aliases": [
+            "pay",
+            "transfer",
+            "sendrubies"
+          ],
+          "category": "economy",
+          "description": "Donate or transfer Rubies to another registered traveler",
+          "usage": "!donate @user <amount>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "leaderboard",
+          "aliases": [
+            "lb",
+            "rich",
+            "rank",
+            "shame",
+            "top",
+            "baltop"
+          ],
+          "category": "economy",
+          "description": "View leaderboards: Richest (.rich), Wealth Ranks (.rank), and Hall of Shame (.shame)",
+          "usage": ".lb [rich|rank|shame] or .rich / .rank / .shame",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "lottery",
+          "aliases": [
+            "ll",
+            "lotto",
+            "buyticket",
+            "lottobuy",
+            "tickets",
+            "lotterydraw"
+          ],
+          "category": "economy",
+          "description": "Participate in the 2-Hour Grand Lottery (1k Rubies/ticket, max 1 slot per person, win up to 190k Rubies)",
+          "usage": "!ll (view) | !ll buy <amount> | !ll entry",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "mine",
+          "aliases": [
+            "mining",
+            "dig"
+          ],
+          "category": "economy",
+          "description": "Mine for precious Ruby veins in the subterranean caverns (Cooldown: 1 hour)",
+          "usage": "!mine",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "profile",
+          "aliases": [
+            "p",
+            "me",
+            "userinfo"
+          ],
+          "category": "economy",
+          "description": "View your profile, Ruby wealth, and traveler status",
+          "usage": "!profile or !profile @user",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "register",
+          "aliases": [
+            "reg",
+            "signup"
+          ],
+          "category": "economy",
+          "description": "Register with Shorekeeper to unlock AI chat and receive a 40,000 Ruby bonus",
+          "usage": "!register [your name]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "rubyrain",
+          "aliases": [
+            "spawnrain",
+            "rubydrop",
+            "drop"
+          ],
+          "category": "economy",
+          "description": "Manually summon a 1-minute Ruby Rain storm in this group (Admin / Owner only)",
+          "usage": "!rubyrain",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "setbio",
+          "aliases": [
+            "bio"
+          ],
+          "category": "economy",
+          "description": "Update your profile bio for 500 Rubies",
+          "usage": "!setbio <your bio message>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "setname",
+          "aliases": [
+            "changename",
+            "rename"
+          ],
+          "category": "economy",
+          "description": "Change your traveler display name for 1,000 Rubies",
+          "usage": "!setname <new name>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "weekly",
+          "aliases": [
+            "claimweekly"
+          ],
+          "category": "economy",
+          "description": "Claim your weekly 25,000 Ruby chest from Shorekeeper (Cooldown: 7 days)",
+          "usage": "!weekly",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "withdraw",
+          "aliases": [
+            "wd"
+          ],
+          "category": "economy",
+          "description": "Withdraw Rubies from your Bank Vault into your pocket",
+          "usage": "!withdraw <amount> or !withdraw all",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "work",
+          "aliases": [
+            "job",
+            "shift"
+          ],
+          "category": "economy",
+          "description": "Work a shift at the Black Shores to earn between 10k and 20k Rubies (Cooldown: 5 hours)",
+          "usage": "!work",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        }
+      ],
+      "fun": [
+        {
+          "name": "8ball",
+          "aliases": [
+            "ball",
+            "ask8ball"
+          ],
+          "category": "fun",
+          "description": "Ask the Magic 8-Ball a yes/no question",
+          "usage": "!8ball <your question>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "booby",
+          "aliases": [
+            "boobs",
+            "boob",
+            "tits",
+            "chest"
+          ],
+          "category": "fun",
+          "description": "Random booby size meter generator",
+          "usage": "!booby [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "compliment",
+          "aliases": [
+            "praise",
+            "kind"
+          ],
+          "category": "fun",
+          "description": "Send a wholesome compliment",
+          "usage": "!compliment [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "couplepp",
+          "aliases": [],
+          "category": "fun",
+          "description": "Compare PP sizes between two users",
+          "usage": "!couplepp @user1 @user2",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "dare",
+          "aliases": [
+            "tod-dare"
+          ],
+          "category": "fun",
+          "description": "Get a Dare challenge for Truth or Dare",
+          "usage": "!dare",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "darkjoke",
+          "aliases": [],
+          "category": "fun",
+          "description": "A joke with a dark humor twist",
+          "usage": "!darkjoke",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "flip",
+          "aliases": [
+            "coin",
+            "toss"
+          ],
+          "category": "fun",
+          "description": "Flip a coin (Heads or Tails)",
+          "usage": "!flip",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "gay",
+          "aliases": [
+            "howgay"
+          ],
+          "category": "fun",
+          "description": "Calculate gay rate percentage for someone",
+          "usage": "!gay [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "golddigger",
+          "aliases": [
+            "gd",
+            "digger"
+          ],
+          "category": "fun",
+          "description": "Calculate gold digger rate percentage for someone",
+          "usage": "!golddigger [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "joke",
+          "aliases": [
+            "funny"
+          ],
+          "category": "fun",
+          "description": "Get a random funny joke",
+          "usage": "!joke",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "lesbian",
+          "aliases": [],
+          "category": "fun",
+          "description": "Calculate lesbian rate percentage for someone",
+          "usage": "!lesbian [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "meme",
+          "aliases": [
+            "memes"
+          ],
+          "category": "fun",
+          "description": "Fetch a trending meme from Reddit",
+          "usage": "!meme",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "pp",
+          "aliases": [
+            "size"
+          ],
+          "category": "fun",
+          "description": "Random PP size meter generator",
+          "usage": "!pp [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "quote",
+          "aliases": [
+            "motivate",
+            "wisdom"
+          ],
+          "category": "fun",
+          "description": "Get an inspirational or thought-provoking quote",
+          "usage": "!quote",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "roast",
+          "aliases": [
+            "burn"
+          ],
+          "category": "fun",
+          "description": "Deliver a playful roast to someone",
+          "usage": "!roast [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "roll",
+          "aliases": [
+            "dice"
+          ],
+          "category": "fun",
+          "description": "Roll a dice with default 6 sides or custom number",
+          "usage": "!roll [max_number]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "ship",
+          "aliases": [
+            "love",
+            "match"
+          ],
+          "category": "fun",
+          "description": "Calculate love compatibility and ship two users",
+          "usage": "!ship @user1 @user2 or !ship @user",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "simp",
+          "aliases": [],
+          "category": "fun",
+          "description": "Calculate simp rate percentage for someone",
+          "usage": "!simp [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "trivia",
+          "aliases": [
+            "quiz"
+          ],
+          "category": "fun",
+          "description": "Test your knowledge with a trivia question",
+          "usage": "!trivia",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "truth",
+          "aliases": [
+            "tod-truth"
+          ],
+          "category": "fun",
+          "description": "Get a Truth challenge for Truth or Dare",
+          "usage": "!truth",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "wyr",
+          "aliases": [
+            "wouldyourather"
+          ],
+          "category": "fun",
+          "description": "Random \"Would You Rather\" question dilemma",
+          "usage": "!wyr",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        }
+      ],
+      "general": [
+        {
+          "name": "help",
+          "aliases": [
+            "menu",
+            "commands",
+            "list"
+          ],
+          "category": "general",
+          "description": "Display all available commands or details about a specific command",
+          "usage": "!help [command_name]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "info",
+          "aliases": [
+            "botinfo",
+            "about"
+          ],
+          "category": "general",
+          "description": "View technical specifications about Funzon bot",
+          "usage": "!info",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "owner",
+          "aliases": [
+            "creator",
+            "developer"
+          ],
+          "category": "general",
+          "description": "View owner contact details",
+          "usage": "!owner",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "ping",
+          "aliases": [
+            "p",
+            "speed"
+          ],
+          "category": "general",
+          "description": "Check bot response speed and latency",
+          "usage": "!ping",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "reload",
+          "aliases": [
+            "restartcmd",
+            "refresh"
+          ],
+          "category": "general",
+          "description": "Reload all commands from disk without restarting bot (Owner only)",
+          "usage": "!reload",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": true
+        },
+        {
+          "name": "uptime",
+          "aliases": [
+            "runtime"
+          ],
+          "category": "general",
+          "description": "Shows bot and host system uptime",
+          "usage": "!uptime",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        }
+      ],
+      "group": [
+        {
+          "name": "antilink",
+          "aliases": [],
+          "category": "group",
+          "description": "Toggle anti-link protection (automatically removes link messages)",
+          "usage": "!antilink [on | off]",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "delete",
+          "aliases": [
+            "del",
+            "d"
+          ],
+          "category": "group",
+          "description": "Delete a quoted message in the group",
+          "usage": "!delete (reply to the message you want to delete)",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "demote",
+          "aliases": [
+            "unadmin"
+          ],
+          "category": "group",
+          "description": "Demote an administrator to regular member",
+          "usage": "!demote @user or reply to their message",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "goodbye",
+          "aliases": [
+            "leavemsg",
+            "setgoodbye",
+            "bye"
+          ],
+          "category": "group",
+          "description": "Toggle or customize the goodbye message when members leave",
+          "usage": "!goodbye [on | off | set <text> | reset]",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "groupinfo",
+          "aliases": [
+            "gcinfo",
+            "group"
+          ],
+          "category": "group",
+          "description": "View detailed information and settings of the group",
+          "usage": "!groupinfo",
+          "adminOnly": false,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "hidetag",
+          "aliases": [
+            "htag"
+          ],
+          "category": "group",
+          "description": "Broadcast a message tagging all members without listing all numbers",
+          "usage": "!hidetag <message>",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "kick",
+          "aliases": [
+            "remove",
+            "ban"
+          ],
+          "category": "group",
+          "description": "Remove a member from the group (Admin only)",
+          "usage": "!kick @user or reply to their message",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "link",
+          "aliases": [
+            "grouplink",
+            "gclink",
+            "invite"
+          ],
+          "category": "group",
+          "description": "Get the group invite link",
+          "usage": "!link",
+          "adminOnly": false,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "mute",
+          "aliases": [
+            "close"
+          ],
+          "category": "group",
+          "description": "Close group so only administrators can send messages",
+          "usage": "!mute",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "promote",
+          "aliases": [
+            "admin"
+          ],
+          "category": "group",
+          "description": "Promote a member to group administrator",
+          "usage": "!promote @user or reply to their message",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "resetwarn",
+          "aliases": [
+            "unwarn",
+            "clearwarns"
+          ],
+          "category": "group",
+          "description": "Clear all warnings for a user",
+          "usage": "!resetwarn @user",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "tagall",
+          "aliases": [
+            "everyone",
+            "announce"
+          ],
+          "category": "group",
+          "description": "Mention all group members with an announcement message",
+          "usage": "!tagall [announcement text]",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "unmute",
+          "aliases": [
+            "open"
+          ],
+          "category": "group",
+          "description": "Open group so all participants can send messages",
+          "usage": "!unmute",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "warn",
+          "aliases": [],
+          "category": "group",
+          "description": "Issue a formal warning to a group member (3 warns = kick)",
+          "usage": "!warn @user [reason]",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        },
+        {
+          "name": "welcome",
+          "aliases": [
+            "welcomemsg",
+            "setwelcome"
+          ],
+          "category": "group",
+          "description": "Toggle or customize the welcome message when new members join",
+          "usage": "!welcome [on | off | set <text> | reset]",
+          "adminOnly": true,
+          "groupOnly": true,
+          "ownerOnly": false
+        }
+      ],
+      "interaction": [
+        {
+          "name": "bonk",
+          "aliases": [],
+          "category": "interaction",
+          "description": "Bonk someone and send them to horny jail",
+          "usage": "!bonk [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "dance",
+          "aliases": [],
+          "category": "interaction",
+          "description": "Dance enthusiastically with someone or solo",
+          "usage": "!dance [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "hug",
+          "aliases": [
+            "cuddle"
+          ],
+          "category": "interaction",
+          "description": "Give someone a warm anime hug",
+          "usage": "!hug [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "kidnap",
+          "aliases": [],
+          "category": "interaction",
+          "description": "Playfully kidnap someone in a van",
+          "usage": "!kidnap [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "kill",
+          "aliases": [
+            "yeet"
+          ],
+          "category": "interaction",
+          "description": "Dramatically yeet or defeat someone",
+          "usage": "!kill [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "kiss",
+          "aliases": [],
+          "category": "interaction",
+          "description": "Give someone a sweet kiss",
+          "usage": "!kiss [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "laugh",
+          "aliases": [],
+          "category": "interaction",
+          "description": "Laugh out loud with or at someone",
+          "usage": "!laugh [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "pat",
+          "aliases": [
+            "headpat"
+          ],
+          "category": "interaction",
+          "description": "Pat someone gently on the head",
+          "usage": "!pat [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "punch",
+          "aliases": [],
+          "category": "interaction",
+          "description": "Punch someone",
+          "usage": "!punch [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "sad",
+          "aliases": [
+            "cry"
+          ],
+          "category": "interaction",
+          "description": "Express sadness or cry",
+          "usage": "!sad",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "shrug",
+          "aliases": [],
+          "category": "interaction",
+          "description": "Shrug with indifference",
+          "usage": "!shrug",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "slap",
+          "aliases": [],
+          "category": "interaction",
+          "description": "Slap someone",
+          "usage": "!slap [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "smile",
+          "aliases": [],
+          "category": "interaction",
+          "description": "Smile warmly at someone",
+          "usage": "!smile [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "tickle",
+          "aliases": [],
+          "category": "interaction",
+          "description": "Tickle someone until they giggle",
+          "usage": "!tickle [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "wave",
+          "aliases": [],
+          "category": "interaction",
+          "description": "Wave at someone",
+          "usage": "!wave [@user]",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        }
+      ],
+      "search": [
+        {
+          "name": "lyrics",
+          "aliases": [
+            "songlyrics",
+            "lyric"
+          ],
+          "category": "search",
+          "description": "Search lyrics for any song title or artist",
+          "usage": "!lyrics <song title>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "pinterest",
+          "aliases": [
+            "pint",
+            "pin"
+          ],
+          "category": "search",
+          "description": "Search aesthetic Pinterest style images",
+          "usage": "!pinterest <query>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "wallpaper",
+          "aliases": [
+            "wall",
+            "wp"
+          ],
+          "category": "search",
+          "description": "Search and download high resolution wallpapers",
+          "usage": "!wallpaper <query>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        }
+      ],
+      "tools": [
+        {
+          "name": "calc",
+          "aliases": [
+            "math",
+            "calculate"
+          ],
+          "category": "tools",
+          "description": "Safely evaluate mathematical expressions",
+          "usage": "!calc <expression>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "dict",
+          "aliases": [
+            "define",
+            "dictionary",
+            "meaning"
+          ],
+          "category": "tools",
+          "description": "Lookup definitions, part of speech, and examples of English words",
+          "usage": "!dict <word>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "qr",
+          "aliases": [
+            "qrcode"
+          ],
+          "category": "tools",
+          "description": "Generate a QR code image from any text or link",
+          "usage": "!qr <text or url>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "translate",
+          "aliases": [
+            "tr"
+          ],
+          "category": "tools",
+          "description": "Translate text to English or specified language code",
+          "usage": "!translate [lang_code] <text> (e.g. !translate es Hello friend)",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "weather",
+          "aliases": [
+            "climate"
+          ],
+          "category": "tools",
+          "description": "Get real-time weather information for any location",
+          "usage": "!weather <city_name>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        },
+        {
+          "name": "wiki",
+          "aliases": [
+            "wikipedia",
+            "search"
+          ],
+          "category": "tools",
+          "description": "Search Wikipedia for articles and summaries",
+          "usage": "!wiki <search query>",
+          "adminOnly": false,
+          "groupOnly": false,
+          "ownerOnly": false
+        }
+      ]
+    }
+  }
+}

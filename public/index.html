@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Black Shores — Shorekeeper Bot</title>
+  <meta name="description" content="Official hub for Shorekeeper WhatsApp Bot. Explore the Ruby Economy, 2-Hour Grand Jackpots, Audio Stickers, and AI companion." />
+  <meta name="theme-color" content="#4effff" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body data-page="home">
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand">
+        <img src="/assets/thumb.jpg" alt="Shorekeeper" />
+        <span>BLACK SHORES</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="/" class="active">Home</a>
+        <a href="/leaderboard">Leaderboard</a>
+        <a href="/lottery">Lottery</a>
+        <a href="/commands">Commands</a>
+        <a href="/login" id="navAuthMenuLink">Login / Link</a>
+      </nav>
+
+      <div class="nav-right">
+        <span class="status-badge" id="botStatusPill">
+          <span class="status-dot"></span>
+          <span id="botStatusText">Online</span>
+        </span>
+        <a href="/login" class="btn nav-cta" id="navAuthBtn">Login / Link</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <h1>Welcome to Black Shores</h1>
+        <p>
+          The home of <strong>Shorekeeper AI</strong>. Earn <strong>Rubies</strong>, catch <strong>Ruby Rain</strong> drops, win the 2-Hour Jackpot, and create WhatsApp <strong>Audio Stickers</strong>.
+        </p>
+        <div class="hero-actions">
+          <a href="https://wa.me/48450424525" target="_blank" rel="noopener noreferrer" class="btn primary" id="heroChatBtn">
+            💬 Chat with Shorekeeper
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Spacious Home Content -->
+  <main class="container">
+    <!-- 4 Live Stats -->
+    <section class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="statUsers">--</div>
+        <div class="stat-label">Travelers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value ruby" id="statRubies">--</div>
+        <div class="stat-label">♦ Total Rubies</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statLottery">--</div>
+        <div class="stat-label">Jackpot Round</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="statCommands">--</div>
+        <div class="stat-label">Commands</div>
+      </div>
+    </section>
+
+    <!-- Bot Features -->
+    <section>
+      <h2 class="section-header">Features</h2>
+      <div class="features-grid">
+        <div class="feature-panel">
+          <div class="feature-icon">🦋</div>
+          <h3 class="feature-title">Shorekeeper AI &amp; Memory</h3>
+          <p class="feature-desc">Tag, reply, or message directly to converse with Shorekeeper. She remembers past chats and reacts with custom stickers.</p>
+          <a href="/commands?cat=ai" class="btn">Explore AI Commands</a>
+        </div>
+
+        <div class="feature-panel">
+          <div class="feature-icon">💎</div>
+          <h3 class="feature-title">Ruby Economy &amp; Ranks</h3>
+          <p class="feature-desc">Register for a 40,000 ♦ gift. Work shifts, mine crystals, store savings in your bank, and ascend 6 Rank Tiers.</p>
+          <a href="/leaderboard" class="btn">View Leaderboard</a>
+        </div>
+
+        <div class="feature-panel">
+          <div class="feature-icon">🎰</div>
+          <h3 class="feature-title">2-Hour Grand Jackpot</h3>
+          <p class="feature-desc">Buy tickets into your inventory (<code>.ll buy</code>) and claim 1 slot per round (<code>.ll entry</code>). Solo winners take 190,000 ♦.</p>
+          <a href="/lottery" class="btn">View Live Jackpot</a>
+        </div>
+
+        <div class="feature-panel">
+          <div class="feature-icon">🔊</div>
+          <h3 class="feature-title">Audio &amp; Crop Stickers</h3>
+          <p class="feature-desc">Build real WhatsApp Sound Stickers (<code>.as</code>), 1:1 cropped stickers (<code>.s crop</code> / <code>.as crop</code>), Quotly quotes, and steal packs with <code>.take</code>.</p>
+          <a href="/commands?cat=converter" class="btn">Sticker Studio</a>
+        </div>
+
+        <div class="feature-panel">
+          <div class="feature-icon">🌧️</div>
+          <h3 class="feature-title">Celestial Ruby Rain</h3>
+          <p class="feature-desc">Random storms drop across active groups every 3–4 hours for 60 seconds. Claim 5,000–15,000 ♦ with <code>.claim</code>.</p>
+          <a href="/commands?cat=economy" class="btn">Economy Commands</a>
+        </div>
+
+        <div class="feature-panel">
+          <div class="feature-icon">📲</div>
+          <h3 class="feature-title">Downloaders &amp; Games</h3>
+          <p class="feature-desc">Fast MP3/MP4 downloads from YouTube, Instagram, TikTok, X, and Facebook alongside group moderation and anime games.</p>
+          <a href="/commands" class="btn">Browse All Commands</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Join Communities -->
+    <section>
+      <h2 class="section-header">Join Our Communities</h2>
+      <div class="community-grid">
+        <div class="comm-card whatsapp">
+          <img src="/assets/menu.jpg" alt="Shorekeeper" class="comm-avatar" />
+          <div class="comm-platform">WhatsApp Bot</div>
+          <h3 class="comm-name">Shorekeeper Direct</h3>
+          <p class="comm-desc">Message Shorekeeper in DM or add her to your group. Send <code>.register &lt;name&gt;</code> to receive 40,000 ♦ Rubies.</p>
+          <a href="https://wa.me/48450424525" target="_blank" rel="noopener noreferrer" class="btn" id="cardBotWaBtn">Open in WhatsApp</a>
+        </div>
+
+        <div class="comm-card cyan">
+          <img src="/assets/hero.jpg" alt="Black Shores Group" class="comm-avatar" />
+          <div class="comm-platform">WhatsApp Community</div>
+          <h3 class="comm-name">Black Shores Group</h3>
+          <p class="comm-desc" id="groupCardDesc">Join players for live Ruby Rain storms, 10-slot Jackpot races, Rich/Rank/Shame battles, and Audio Stickers.</p>
+          <a href="https://wa.me/48450424525" target="_blank" rel="noopener noreferrer" class="btn" id="cardGroupBtn">Add Bot to Group</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span><strong>BLACK SHORES</strong> — Shorekeeper Bot (<span id="footerPhone">+48450424525</span>)</span>
+    <span>KIBA OFFICIAL</span>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

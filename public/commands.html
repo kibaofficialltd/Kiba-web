@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Commands — Black Shores</title>
+  <meta name="theme-color" content="#4effff" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body data-page="commands">
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand">
+        <img src="/assets/thumb.jpg" alt="Shorekeeper" />
+        <span>BLACK SHORES</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/leaderboard">Leaderboard</a>
+        <a href="/lottery">Lottery</a>
+        <a href="/commands" class="active">Commands</a>
+        <a href="/login" id="navAuthMenuLink">Login / Link</a>
+      </nav>
+
+      <div class="nav-right">
+        <span class="status-badge" id="botStatusPill">
+          <span class="status-dot"></span>
+          <span id="botStatusText">Online</span>
+        </span>
+        <a href="/login" class="btn nav-cta" id="navAuthBtn">Login / Link</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="subpage-top">
+      <div>
+        <h1 class="subpage-title">Command Directory</h1>
+        <p class="subpage-desc">Browse all <span id="cmdTotalLabel">100</span> commands. Click any card to copy.</p>
+      </div>
+      <input type="search" id="cmdSearch" class="cmd-search" placeholder="Search commands (e.g. as, take, ig, rich)..." />
+    </div>
+
+    <div>
+      <div class="cat-pills" id="catPills"></div>
+      <div class="cmd-grid" id="cmdGrid">
+        <div class="empty-note">Loading commands...</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span><strong>BLACK SHORES</strong> — Shorekeeper Bot (<span id="footerPhone">+48450424525</span>)</span>
+    <span>KIBA OFFICIAL</span>
+  </footer>
+
+  <div class="toast" id="toast">Copied!</div>
+  <script src="/app.js"></script>
+</body>
+</html>

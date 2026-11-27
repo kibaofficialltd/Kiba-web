@@ -1,1 +1,0 @@
-ALTER TABLE "player_stats" ADD COLUMN "rank" text DEFAULT 'Member' NOT NULL;

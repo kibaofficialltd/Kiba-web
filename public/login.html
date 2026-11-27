@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Link WhatsApp Account — Black Shores</title>
+  <meta name="theme-color" content="#4effff" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body data-page="login">
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand">
+        <img src="/assets/thumb.jpg" alt="Shorekeeper" />
+        <span>BLACK SHORES</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/leaderboard">Leaderboard</a>
+        <a href="/lottery">Lottery</a>
+        <a href="/commands">Commands</a>
+        <a href="/login" class="active" id="navAuthMenuLink">Login / Link</a>
+      </nav>
+
+      <div class="nav-right">
+        <span class="status-badge" id="botStatusPill">
+          <span class="status-dot"></span>
+          <span id="botStatusText">Online</span>
+        </span>
+        <a href="/login" class="btn nav-cta" id="navAuthBtn">Login / Link</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Unauthenticated: OTP Link Flow -->
+    <section id="authSection" class="auth-wrap">
+      <div class="panel-card auth-card">
+        <div class="auth-head">
+          <img src="/assets/menu.jpg" alt="Shorekeeper" class="comm-avatar" style="margin-bottom:14px;" />
+          <h1 class="auth-title">Link WhatsApp Account</h1>
+          <p class="subpage-desc">
+            Enter your registered WhatsApp number. Shorekeeper will DM a 6-digit OTP to your WhatsApp to link your profile.
+          </p>
+        </div>
+
+        <div id="authAlert" class="auth-alert" hidden></div>
+
+        <!-- Step 1: Phone -->
+        <form id="phoneForm" class="auth-form">
+          <label class="field-label" for="phoneInput">Registered WhatsApp Number (with country code)</label>
+          <input
+            type="tel"
+            id="phoneInput"
+            class="auth-input"
+            placeholder="e.g. 919863068885"
+            autocomplete="tel"
+            required
+          />
+          <span class="field-hint">Not registered yet? Message <code>.register &lt;your name&gt;</code> to Shorekeeper on WhatsApp first.</span>
+          <button type="submit" class="btn primary full-btn" id="sendOtpBtn">Send OTP via WhatsApp DM</button>
+        </form>
+
+        <!-- Step 2: Verify OTP -->
+        <form id="otpForm" class="auth-form" hidden>
+          <div class="otp-sent-note" id="otpSentNote">OTP sent to your WhatsApp DM!</div>
+          <label class="field-label" for="otpInput">Enter 6-Digit OTP from WhatsApp DM</label>
+          <input
+            type="text"
+            id="otpInput"
+            class="auth-input otp-input"
+            placeholder="000000"
+            maxlength="6"
+            inputmode="numeric"
+            autocomplete="one-time-code"
+            required
+          />
+          <div class="otp-actions-row">
+            <button type="button" class="btn btn-sm-ghost" id="changePhoneBtn">← Change Number</button>
+            <button type="button" class="btn btn-sm-ghost" id="resendOtpBtn">Resend OTP</button>
+          </div>
+          <button type="submit" class="btn primary full-btn" id="verifyOtpBtn">Verify &amp; Link Account</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Authenticated: Linked Account Dashboard -->
+    <section id="accountSection" hidden>
+      <div class="subpage-top">
+        <div>
+          <span class="linked-badge">✅ WhatsApp Account Linked</span>
+          <h1 class="subpage-title" id="accName">--</h1>
+          <p class="subpage-desc" id="accBio">--</p>
+        </div>
+        <button class="btn logout-btn" id="logoutBtn">Unlink / Logout</button>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-value ruby" id="accWallet">--</div>
+          <div class="stat-label">♦ Wallet</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="accBank">--</div>
+          <div class="stat-label">🏦 Bank Vault</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value ruby" id="accTotal">--</div>
+          <div class="stat-label">💠 Total Wealth</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="accTickets">--</div>
+          <div class="stat-label">🎟️ Lottery Tickets</div>
+        </div>
+      </div>
+
+      <div class="lottery-grid">
+        <div class="panel-card">
+          <h2 style="margin:0 0 14px;">Traveler Standing &amp; Rank</h2>
+          <div class="lb-list">
+            <div class="lb-row"><span>🎖️ Current Rank</span><strong id="accRank" style="color:var(--accent)">--</strong></div>
+            <div class="lb-row"><span>🏆 Leaderboard Standing</span><strong id="accStanding">--</strong></div>
+            <div class="lb-row"><span>💬 Total Chats</span><strong id="accChats">--</strong></div>
+            <div class="lb-row"><span>📱 Linked Number</span><strong id="accPhone">--</strong></div>
+          </div>
+          <p class="subpage-desc" id="accNextRank" style="margin-top:16px;"></p>
+        </div>
+
+        <div class="panel-card">
+          <h2 style="margin:0 0 14px;">Active Jackpot Status</h2>
+          <div class="lb-list">
+            <div class="lb-row"><span>🎲 Current Round</span><strong id="accLotteryRound" style="color:var(--accent)">--</strong></div>
+            <div class="lb-row"><span>🎰 Your Round Entry</span><strong id="accLotterySlot">--</strong></div>
+            <div class="lb-row"><span>👥 Round Slots Filled</span><strong id="accLotteryFilled">--</strong></div>
+          </div>
+          <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="/lottery" class="btn">View Jackpot</a>
+            <a href="/leaderboard" class="btn">View Leaderboards</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span><strong>BLACK SHORES</strong> — Shorekeeper Bot (<span id="footerPhone">+48450424525</span>)</span>
+    <span>KIBA OFFICIAL</span>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>

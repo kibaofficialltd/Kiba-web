@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2-Hour Grand Jackpot — Black Shores</title>
+  <meta name="theme-color" content="#4effff" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body data-page="lottery">
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand">
+        <img src="/assets/thumb.jpg" alt="Shorekeeper" />
+        <span>BLACK SHORES</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/leaderboard">Leaderboard</a>
+        <a href="/lottery" class="active">Lottery</a>
+        <a href="/commands">Commands</a>
+        <a href="/login" id="navAuthMenuLink">Login / Link</a>
+      </nav>
+
+      <div class="nav-right">
+        <span class="status-badge" id="botStatusPill">
+          <span class="status-dot"></span>
+          <span id="botStatusText">Online</span>
+        </span>
+        <a href="/login" class="btn nav-cta" id="navAuthBtn">Login / Link</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="subpage-top">
+      <div>
+        <h1 class="subpage-title">2-Hour Grand Jackpot <span id="lotteryRoundBadge" style="color:var(--accent)">#--</span></h1>
+        <p class="subpage-desc">1,000 ♦ per ticket • Stored in inventory • 1 slot per traveler via <code>.ll entry</code>.</p>
+      </div>
+      <div class="timer-box" id="lotteryTimer">--:--:--</div>
+    </div>
+
+    <div class="lottery-grid">
+      <div class="panel-card">
+        <h2 style="margin:0 0 6px;">Current Round Participants</h2>
+        <div class="progress-wrap">
+          <div class="progress-meta">
+            <span>Slots Filled (auto-draws at 10/10 or timer end)</span>
+            <strong id="lotterySlotsText">0 / 10</strong>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="lotteryProgressFill" style="width:0%"></div>
+          </div>
+        </div>
+
+        <div class="slots-wrap" id="lotterySlotsList">
+          <div class="empty-note">Loading slots...</div>
+        </div>
+      </div>
+
+      <div class="panel-card">
+        <h2 style="margin:0 0 14px;">Prizes &amp; Last Draw</h2>
+        <div class="lb-list" style="margin-bottom:20px;">
+          <div class="lb-row"><span>🥇 1st Place</span><span class="lb-val">100,000 ♦</span></div>
+          <div class="lb-row"><span>🥈 2nd Place</span><span class="lb-val">60,000 ♦</span></div>
+          <div class="lb-row"><span>🥉 3rd Place</span><span class="lb-val">30,000 ♦</span></div>
+          <div class="lb-row"><span>🌟 Solo Champion Rule</span><span class="lb-val">190,000 ♦</span></div>
+        </div>
+
+        <h3 style="margin:0 0 10px; font-size:1rem; color:var(--muted);">Last Round Winners</h3>
+        <div class="lb-list" id="lotteryLastWinners">
+          <div class="empty-note">Loading draw history...</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <span><strong>BLACK SHORES</strong> — Shorekeeper Bot (<span id="footerPhone">+48450424525</span>)</span>
+    <span>KIBA OFFICIAL</span>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
