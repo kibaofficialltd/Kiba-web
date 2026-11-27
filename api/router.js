@@ -31,7 +31,6 @@ function forwardCookies(upstreamRes, res) {
     : [];
 
   if (cookies.length > 0) {
-    // Strip upstream Domain attribute so session cookie binds cleanly to Vercel host
     const cleaned = cookies.map((c) => c.replace(/;\s*Domain=[^;]+/gi, ''));
     res.setHeader('Set-Cookie', cleaned);
   }
@@ -39,8 +38,16 @@ function forwardCookies(upstreamRes, res) {
 
 export default async function handler(req, res) {
   const parsed = new URL(req.url || '/', 'http://localhost');
-  const pathname = parsed.pathname;
-  const search = parsed.search || '';
+  const rewrittenPath = parsed.searchParams.get('path');
+  let pathname = parsed.pathname;
+
+  if (rewrittenPath) {
+    pathname = `/api/${rewrittenPath.replace(/^\/+/, '')}`;
+    parsed.searchParams.delete('path');
+  }
+
+  const remainingSearch = parsed.searchParams.toString();
+  const search = remainingSearch ? `?${remainingSearch}` : '';
   const botApiUrl = (process.env.BOT_API_URL || '').trim().replace(/\/+$/, '');
 
   if (pathname === '/api/health') {
