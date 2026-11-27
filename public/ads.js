@@ -58,16 +58,16 @@ function renderAdSenseUnit(tierId) {
     ensureAdSenseScript(clientId);
     box.innerHTML =
       `<div class="adsense-placeholder">` +
-      `<div class="adsense-tag">Google AdSense Active (${escapeHtml(clientId)})</div>` +
-      `<p>Auto Ads script loaded for <strong>shoreisland.duckdns.org</strong>. Add <code>ADSENSE_SLOT_ID</code> in bot env for an explicit display unit.</p>` +
+      `<div class="adsense-tag">Sponsored Showcase</div>` +
+      `<p>Keep this page open until the timer completes to claim your Ruby reward.</p>` +
       `</div>`;
     return;
   }
 
   box.innerHTML =
     `<div class="adsense-placeholder">` +
-    `<div class="adsense-tag">Google AdSense Sponsor Bay Ready</div>` +
-    `<p>Configure <code>ADSENSE_CLIENT_ID</code> (<code>ca-pub-...</code>) and <code>ADSENSE_SLOT_ID</code> in Shorekeeper's <code>.env</code> to serve live Google AdSense ads inside this viewport.</p>` +
+    `<div class="adsense-tag">Sponsored Showcase</div>` +
+    `<p>Keep this page open until the timer completes to claim your Ruby reward.</p>` +
     `</div>`;
 }
 
@@ -90,7 +90,6 @@ function renderAdsHud() {
   const remainEl = document.getElementById('hudRemainingToday');
   const totalRubiesEl = document.getElementById('hudTotalAdRubies');
   const resetEl = document.getElementById('hudResetTimer');
-  const cfgNote = document.getElementById('adsenseConfigStatus');
 
   if (badge) badge.textContent = `${d.watchedToday || 0} / ${d.dailyLimit || 10} Today`;
   if (watchedEl) watchedEl.textContent = `${d.watchedToday || 0} / ${d.dailyLimit || 10}`;
@@ -123,18 +122,8 @@ function renderAdsHud() {
     }
   }
 
-  if (cfgNote) {
-    if (d.adsense?.configured) {
-      ensureAdSenseScript(d.adsense.clientId);
-      cfgNote.innerHTML =
-        `🟢 Connected Publisher ID: <code>${escapeHtml(d.adsense.clientId)}</code> ` +
-        (d.adsense.slot60s ? `| Slot: <code>${escapeHtml(d.adsense.slot60s)}</code>` : '(Auto Ads mode)') +
-        `<br /><small>Note: Standard AdSense display units do not emit native video completion events; rewards verify server-side against full ${d.tiers?.[0]?.durationSec || 60}s / ${d.tiers?.[1]?.durationSec || 120}s view timers and a strict ${d.dailyLimit || 10}-ad daily limit.</small>`;
-    } else {
-      cfgNote.innerHTML =
-        `🟡 <strong>Waiting for your AdSense ID:</strong> Set <code>ADSENSE_CLIENT_ID="ca-pub-XXXXXXXXXXXXXXXX"</code> and <code>ADSENSE_SLOT_ID="1234567890"</code> in your bot <code>.env</code> once approved by Google AdSense. The server-enforced 60s (10,000 ♦) and 2-min (30,000 ♦) reward system with the 10 ads/day limit is active right now.` +
-        `<br /><small>Tip: Standard AdSense display ads cannot lock video playback duration directly; for true video rewarded callbacks later, link Google Ad Manager / H5 Games Ads SDK to this same session API.</small>`;
-    }
+  if (d.adsense?.configured) {
+    ensureAdSenseScript(d.adsense.clientId);
   }
 }
 
