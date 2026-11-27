@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Watch Ads &amp; Earn Rubies — Black Shores</title>
+  <meta name="theme-color" content="#4effff" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body data-page="ads">
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="bg-stage" aria-hidden="true">
+    <div class="bg-aurora bg-aurora-cyan"></div>
+    <div class="bg-aurora bg-aurora-indigo"></div>
+    <div class="bg-aurora bg-aurora-ruby"></div>
+    <div class="bg-grid"></div>
+    <canvas id="shoreCanvas"></canvas>
+  </div>
+
+  <header class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="brand">
+        <img src="/assets/thumb.jpg" alt="Shorekeeper" />
+        <span>BLACK SHORES</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/leaderboard">Leaderboard</a>
+        <a href="/lottery">Lottery</a>
+        <a href="/commands">Commands</a>
+        <a href="/cards">Cards</a>
+        <a href="/ads" class="active">Watch Ads</a>
+        <a href="/profile">Profile</a>
+        <a href="/login" id="navAuthMenuLink">Login / Link</a>
+      </nav>
+
+      <div class="nav-right">
+        <span class="status-badge" id="botStatusPill">
+          <span class="status-dot"></span>
+          <span id="botStatusText">Online</span>
+        </span>
+        <a href="/login" class="btn nav-cta" id="navAuthBtn">Login / Link</a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="subpage-top">
+      <div>
+        <h1 class="subpage-title">Watch Ads &amp; Earn Rubies <span class="ads-cap-badge" id="adsDailyBadge">0 / 10 Today</span></h1>
+        <p class="subpage-desc">Support the Black Shores portal by viewing sponsor ads. Watch 60s for 10,000 ♦ or 2 minutes for 30,000 ♦ (up to 10 ads per day).</p>
+      </div>
+      <div class="wallet-chip" id="adsWalletChip" hidden>
+        💎 Wallet: <strong id="adsWalletAmt">0 ♦</strong>
+      </div>
+    </div>
+
+    <div class="panel-card ads-auth-banner" id="adsAuthNotice" hidden>
+      <div>
+        <h3 style="margin-bottom:4px;">Link Your WhatsApp Account to Earn Rubies</h3>
+        <p class="form-help" style="margin-bottom:0;">Verify with your WhatsApp number via OTP so watched ad rewards go directly into your Shorekeeper wallet.</p>
+      </div>
+      <a href="/login" class="btn primary">Login / Link Account →</a>
+    </div>
+
+    <div class="ads-hud-grid">
+      <div class="stat-card">
+        <div class="stat-value" id="hudWatchedToday">--</div>
+        <div class="stat-label">Ads Watched Today</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="hudRemainingToday">--</div>
+        <div class="stat-label">Remaining Today (Max 10)</div>
+      </div>
+      <div class="stat-card is-ruby">
+        <div class="stat-value ruby" id="hudTotalAdRubies">--</div>
+        <div class="stat-label">♦ Earned from Ads</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="hudResetTimer">--</div>
+        <div class="stat-label">Daily Reset In</div>
+      </div>
+    </div>
+
+    <section class="ads-tier-grid" id="adsTierGrid">
+      <div class="feature-panel ads-tier-card" data-tier="60s">
+        <div class="ads-tier-top">
+          <span class="ads-duration-pill">⏱️ 60 Seconds</span>
+          <span class="ads-reward-pill">💎 +10,000 ♦</span>
+        </div>
+        <h2 class="feature-title">Standard Sponsor Ad</h2>
+        <p class="feature-desc">Keep this tab open on the sponsor display for 60 full seconds to unlock a verified <strong>10,000 ♦ Ruby</strong> drop.</p>
+        <button class="btn primary ads-start-btn" data-tier="60s" id="btnStart60s">
+          ▶ Watch 60s Ad (+10,000 ♦)
+        </button>
+      </div>
+
+      <div class="feature-panel ads-tier-card is-boost" data-tier="120s">
+        <div class="ads-tier-top">
+          <span class="ads-duration-pill">⏱️ 2 Minutes (120s)</span>
+          <span class="ads-reward-pill ruby">🔥 +30,000 ♦</span>
+        </div>
+        <h2 class="feature-title">Extended Sponsor Ad</h2>
+        <p class="feature-desc">Stay on the extended sponsor showcase for 2 full minutes to claim a boosted <strong>30,000 ♦ Ruby</strong> reward (3x value).</p>
+        <button class="btn primary ads-start-btn" data-tier="120s" id="btnStart120s">
+          ▶ Watch 2m Ad (+30,000 ♦)
+        </button>
+      </div>
+    </section>
+
+    <!-- Active Watch Theater -->
+    <section class="panel-card ads-stage-card" id="adWatchStage" hidden>
+      <div class="ads-stage-header">
+        <div>
+          <span class="hero-badge" id="adStageTierLabel">⏱️ 60-Second Ad</span>
+          <h2 style="margin-top:6px; margin-bottom:2px;" id="adStageRewardLabel">Reward: +10,000 ♦ Rubies</h2>
+          <p class="form-help" id="adStageStatusText" style="margin-bottom:0;">Keep this tab visible until the countdown reaches 0s.</p>
+        </div>
+        <div class="ads-countdown-box">
+          <div class="ads-countdown-num" id="adCountdownNum">60s</div>
+          <div class="ads-countdown-sub">Remaining</div>
+        </div>
+      </div>
+
+      <div class="ads-progress-track">
+        <div class="ads-progress-fill" id="adProgressFill" style="width: 0%;"></div>
+      </div>
+
+      <div class="ads-focus-warning" id="adFocusWarning" hidden>
+        ⚠️ Tab focus paused visual tracking — stay on this tab to complete your sponsor view!
+      </div>
+
+      <!-- Google AdSense Display Container -->
+      <div class="adsense-slot-box" id="adsenseSlotBox"></div>
+
+      <div class="ads-stage-actions">
+        <button class="btn primary" id="btnClaimAdReward" disabled>
+          ⏳ Watching Ad... (60s left)
+        </button>
+        <button class="btn" id="btnCancelAdWatch">Cancel</button>
+      </div>
+    </section>
+
+    <section class="panel-card ads-info-box" id="adsenseConfigNote">
+      <h3 style="margin-bottom:8px;">📢 Google AdSense Integration Status</h3>
+      <p class="form-help" id="adsenseConfigStatus" style="margin-bottom:0;">Checking AdSense publisher configuration...</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span><strong>BLACK SHORES</strong> — Shorekeeper Bot (<span id="footerPhone">+48450424525</span>)</span>
+    <span>KIBA OFFICIAL</span>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="/motion.js"></script>
+  <script src="/app.js"></script>
+  <script src="/ads.js"></script>
+</body>
+</html>
