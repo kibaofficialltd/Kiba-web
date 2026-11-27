@@ -144,9 +144,10 @@ async function loadOverview() {
 
       const groupBtn = document.getElementById('cardGroupBtn');
       const groupDesc = document.getElementById('groupCardDesc');
-      if (groupBtn && data.links.groupInviteUrl) {
-        groupBtn.href = data.links.groupInviteUrl;
-        groupBtn.textContent = 'Join WhatsApp Group';
+      const communityUrl = data.links.groupInviteUrl || 'https://chat.whatsapp.com/JALh5DPX9I6AqMN4uaZzzU';
+      if (groupBtn && communityUrl) {
+        groupBtn.href = communityUrl;
+        groupBtn.textContent = 'Join WhatsApp Community';
       } else if (groupBtn) {
         groupBtn.href = waUrl;
         groupBtn.textContent = 'Add Bot to Group';
