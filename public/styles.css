@@ -844,6 +844,12 @@ body:not([data-page="home"]) .bg-stage::before {
   box-shadow: 0 0 18px rgba(78, 255, 255, 0.18);
 }
 
+.btn:disabled {
+  opacity: 0.48;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .btn.primary {
   background: linear-gradient(135deg, rgba(78, 255, 255, 0.22), rgba(0, 184, 217, 0.28));
   border-color: var(--accent);

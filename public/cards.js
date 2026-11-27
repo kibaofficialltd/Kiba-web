@@ -178,9 +178,14 @@
   function renderPacks(packs) {
     const grid = document.getElementById('packsGrid');
     const guest = document.getElementById('packsGuestBanner');
+    const roleBanner = document.getElementById('packsRoleBanner');
     if (!grid) return;
 
-    if (guest) guest.hidden = Boolean(state.authProfile);
+    const isLinked = Boolean(state.authProfile);
+    const canSummon = Boolean(state.authProfile?.canSummonPack);
+
+    if (guest) guest.hidden = isLinked;
+    if (roleBanner) roleBanner.hidden = !isLinked || canSummon;
     if (!packs.length) return;
 
     grid.innerHTML = packs
@@ -191,8 +196,8 @@
             <h3 class="pack-title">${escapeHtml(p.name)}</h3>
             <p class="pack-desc">${escapeHtml(p.description)}</p>
             <div class="pack-price">${formatNumber(p.price)} ♦</div>
-            <button type="button" class="btn primary full-btn summon-pack-btn" data-pack="${escapeHtml(p.id)}" ${!state.authProfile ? 'disabled' : ''}>
-              Summon (${p.count} Card${p.count > 1 ? 's' : ''})
+            <button type="button" class="btn primary full-btn summon-pack-btn" data-pack="${escapeHtml(p.id)}" ${!canSummon ? 'disabled' : ''}>
+              ${!isLinked ? 'Link Account' : canSummon ? `Summon (${p.count} Card${p.count > 1 ? 's' : ''})` : 'Mod / Owner Only'}
             </button>
           </div>
         `
@@ -201,6 +206,10 @@
 
     grid.querySelectorAll('.summon-pack-btn').forEach((btn) => {
       btn.addEventListener('click', async () => {
+        if (!state.authProfile?.canSummonPack) {
+          showToast('Only Bot Moderators and the Owner can summon packs.');
+          return;
+        }
         const packId = btn.getAttribute('data-pack');
         if (!packId) return;
         const orig = btn.textContent;
@@ -224,7 +233,7 @@
         } catch (err) {
           showToast(err.message);
         } finally {
-          btn.disabled = !state.authProfile;
+          btn.disabled = !state.authProfile?.canSummonPack;
           btn.textContent = orig;
         }
       });
